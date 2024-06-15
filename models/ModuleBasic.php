@@ -58,8 +58,13 @@ class ModuleBasic extends \yii\base\Model
         return true;
     }
     
+    
     public function getModulePaths(): array
     {
-        return Yii::$app->params['moduleAutoloadPaths'];
+        $paths = Yii::$app->params['moduleAutoloadPaths'];
+		foreach ($paths as $path) {
+			$result[$path] = $path;
+		}
+		return $result;
     }
 }
