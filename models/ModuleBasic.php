@@ -59,13 +59,13 @@ class ModuleBasic extends \yii\base\Model
             return false;
         }
         
-        $replaceData['{module_id}'] => $this->moduleId;
-        $replaceData['{module_title}'] => $this->moduleTitle;
-        $replaceData['{module_description}'] => $this->moduleDescription;
-        $replaceData['{module_camelCase}'] => Inflector::camelize($this->moduleId);
-        $replaceData['{module_PascalCase}'] => ucfirst($replaceData['{module_camelCase}']);
-        $replaceData['{module_minHumHub}'] => $this->moduleMinHumHub;
-        $replaceData['{module_author}'] => $this->moduleAuthor;
+        $replaceData['{module_id}'] = $this->moduleId;
+        $replaceData['{module_title}'] = $this->moduleTitle;
+        $replaceData['{module_description}'] = $this->moduleDescription;
+        $replaceData['{module_camelCase}'] = Inflector::camelize($this->moduleId);
+        $replaceData['{module_PascalCase}'] = ucfirst($replaceData['{module_camelCase}']);
+        $replaceData['{module_minHumHub}'] = $this->moduleMinHumHub;
+        $replaceData['{module_author}'] = $this->moduleAuthor;
         
         $src = Yii::getAlias(self::MODULE_TEMPLATE);
         $dst = Yii::getAlias($this->modulePath . '/' . $moduleId);
