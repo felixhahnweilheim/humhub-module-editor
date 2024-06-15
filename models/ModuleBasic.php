@@ -3,9 +3,12 @@
 namespace humhub\modules\moduleEditor\models;
 
 use Yii;
+use yii\helpers\FileHelper;
 
 class ModuleBasic extends \yii\base\Model
 {
+    private const MODULE_TEMPLATE;
+    
     public $modulePath;
     public $moduleId;
     public $moduleTitle;
@@ -52,6 +55,10 @@ class ModuleBasic extends \yii\base\Model
         if (!$this->validate()) {
             return false;
         }
+        
+        $src = Yii::getAlias(self::MODULE_TEMPLATE);
+        $dst = Yii::getAlias($this->modulePath);
+        FileHelper::copyDirectory($src, $dst);
         
         // do something
 
