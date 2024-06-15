@@ -39,6 +39,6 @@ class FileEditor extends \yii\base\Model
     
     private function getFullPath(): string
     {
-        return Yii::getAlias('@' . $moduleId . $file);
+        return Yii::getAlias('@' . $this->moduleId . $this->file);
     }
 }
