@@ -3,6 +3,7 @@
 namespace humhub\modules\moduleEditor\controllers;
 
 use humhub\modules\moduleEditor\models\ModuleBasic;
+use humhub\modules\moduleEditor\models\FileEditor;
 use Yii;
 
 class AdminController extends \humhub\modules\admin\components\Controller
