@@ -6,6 +6,7 @@ use Yii;
 
 class ModuleBasic extends \yii\base\Model
 {
+    public $modulePath;
     public $moduleId;
     public $moduleTitle;
     public $moduleDescription;
@@ -13,6 +14,7 @@ class ModuleBasic extends \yii\base\Model
     public function rules(): array
     {
         return [
+            [['modulePath'], 'isModulePath'],
             [['moduleId', 'moduleTitle', 'moduleDescription'], 'string'],
             [['moduleId'], 'uniqueModuleId']
         ];
@@ -21,9 +23,15 @@ class ModuleBasic extends \yii\base\Model
     public function uniqueModuleId(string $attribute, $params, $validator)
     {
         $modules = Yii::$app->moduleManager->getModules();
-        
-        if (isset($modules[$attribute])) {
-            $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'Module ID is already taken'));
+        if (isset($modules[$this->$attribute])) {
+            $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'Module ID is already taken.'));
+        }
+    }
+    
+    public function isModulePath(string $attribute, $params, $validator)
+    {
+        if (!in_array($this->$attribute, $this->getModulePaths())) {
+            $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'unknown module path'));
         }
     }
 
@@ -48,5 +56,10 @@ class ModuleBasic extends \yii\base\Model
         // do something
 
         return true;
+    }
+    
+    public function getModulePaths(): array
+    {
+        return Yii::$app->params['moduleAutoloadPaths'];
     }
 }

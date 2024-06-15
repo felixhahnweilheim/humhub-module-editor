@@ -10,6 +10,7 @@ use humhub\libs\Html;
         <h3 style="margin-top:0"><?= Yii::t('ModuleEditorModule.admin', 'Create <strong>New</strong> Module') ?></h3>
     </div>
     <div class="form-group">
+        <?= $form->dropDownList($model, 'modulePath', $model->getModulePaths())->; ?>
         <?= $form->field($model, 'moduleId'); ?>
         <?= $form->field($model, 'moduleTitle'); ?>
         <?= $form->field($model, 'moduleDescription'); ?>
