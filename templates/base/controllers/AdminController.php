@@ -10,6 +10,6 @@ class AdminController extends \humhub\modules\admin\components\Controller
 
     public function actionIndex(): string
     {
-        return $this->render('index', ['model' => $form]);
+        return $this->render('index');
     }
 }
