@@ -4,7 +4,7 @@ namespace humhub\modules\module-creator\models;
 
 use Yii;
 
-class ModuleBasics extends \yii\base\Model
+class ModuleBasic extends \yii\base\Model
 {
 
     public function rules(): array
