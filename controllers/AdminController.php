@@ -19,4 +19,15 @@ class AdminController extends \humhub\modules\admin\components\Controller
 
         return $this->render('index', ['model' => $form]);
     }
+    
+    public function actionFileEditor(string $moduleId, string $file): string
+    {
+        $form = new FileEditor($moduleId, $file);
+        
+        if ($form->load(Yii::$app->request->post()) && $form->save()) {
+            $this->view->saved();
+        }
+        
+        return $this->render('file-editor', ['model' => $form]);
+    }
 }
