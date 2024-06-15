@@ -68,7 +68,7 @@ class ModuleBasic extends \yii\base\Model
         $replaceData['{module_author}'] = $this->moduleAuthor;
         
         $src = Yii::getAlias(self::MODULE_TEMPLATE);
-        $dst = Yii::getAlias($this->modulePath . '/' . $moduleId);
+        $dst = Yii::getAlias($this->modulePath . '/' . $this->moduleId);
         FileHelper::createDirectory($dst);
         FileHelper::copyDirectory($src, $dst);
         
