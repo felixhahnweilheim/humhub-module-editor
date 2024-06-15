@@ -11,7 +11,7 @@ class FileEditor extends \yii\base\Model
     public $filePath;
     public $content;
     
-    public function __construct(string $moduleId, string $file):void
+    public function __construct(string $moduleId, string $file)
     {
         $this->moduleId = $moduleId;
         $this->filePath = Yii::getAlias('@' . $moduleId . $file);
