@@ -14,6 +14,8 @@ use humhub\libs\Html;
         <?= $form->field($model, 'moduleId'); ?>
         <?= $form->field($model, 'moduleTitle'); ?>
         <?= $form->field($model, 'moduleDescription'); ?>
+        <?= $form->field($model, 'moduleMinHumHub'); ?>
+        <?= $form->field($model, 'moduleAuthor'); ?>
     </div>
     <div class="form-group">
         <?= Html::submitButton(\Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>
