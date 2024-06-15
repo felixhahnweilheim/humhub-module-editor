@@ -62,8 +62,8 @@ class ModuleBasic extends \yii\base\Model
         $replaceData['{module_id}'] = $this->moduleId;
         $replaceData['{module_title}'] = $this->moduleTitle;
         $replaceData['{module_description}'] = $this->moduleDescription;
-        $replaceData['{module_camelCase}'] = Inflector::camelize($this->moduleId);
-        $replaceData['{module_PascalCase}'] = ucfirst($replaceData['{module_camelCase}']);
+        $replaceData['{module_camelCase}'] = Inflector::variablize($this->moduleId);
+        $replaceData['{module_PascalCase}'] = Inflector::camelize($this->moduleId);
         $replaceData['{module_minHumHub}'] = $this->moduleMinHumHub;
         $replaceData['{module_author}'] = $this->moduleAuthor;
         

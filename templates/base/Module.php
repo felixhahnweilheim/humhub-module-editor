@@ -12,13 +12,13 @@ class Module extends \humhub\components\Module
     // Translatable Module Title
     public function getTitle(): string
     {
-        return Yii::t('{module_PascalCase}.admin', 'Module Editor');
+        return Yii::t('{module_PascalCase}Module.admin', 'Module Editor');
     }
 
     // Translatable Module Description
     public function getDescription(): string
     {
-        return Yii::t('{module_PascalCase}.admin', 'Create and edit modules via UI');
+        return Yii::t('{module_PascalCase}Module.admin', 'Create and edit modules via UI');
     }
 
     // Link to configuration page
