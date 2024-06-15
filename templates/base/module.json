@@ -1,0 +1,14 @@
+{
+    "id": "{module_id}",
+    "version": "0.1.0",
+    "name": "{module_title}",
+    "description": "{module_description}",
+    "humhub": {
+        "minVersion": "{module_minHumHub}"
+    },
+    "authors": [
+        {
+            "name": "{module_author}"
+        }
+    ]  
+}
