@@ -10,7 +10,7 @@ use humhub\libs\Html;
         <h3 style="margin-top:0"><?= Yii::t('ModuleEditorModule.admin', 'File Editor') ?></h3>
     </div>
     <div class="form-group">
-        <?= $form->field($model, 'content'); ?>
+        <?= $form->field($model, 'content')->textarea(['rows' => 20]); ?>
     </div>
     <div class="form-group">
         <?= Html::submitButton(\Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>
