@@ -21,7 +21,7 @@ class AdminController extends \humhub\modules\admin\components\Controller
         return $this->render('index', ['model' => $form]);
     }
     
-    public function actionFileEditor(string $moduleId, string $file): string
+    public function actionFileEditor(string $moduleId = 'module-editor', string $file = '/Module.php'): string
     {
         $form = new FileEditor($moduleId, $file);
         
