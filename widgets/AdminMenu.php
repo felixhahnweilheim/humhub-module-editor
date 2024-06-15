@@ -25,10 +25,10 @@ class AdminMenu extends TabMenu
         ]));
         
         $this->addEntry(new MenuLink([
-            'label' => Yii::t('{module_PascalCase}Module.admin', 'File Editor'),
-            'url' => ['/{module_id}/admin/file-editor'],
+            'label' => Yii::t('ModuleEditorModule.admin', 'File Editor'),
+            'url' => ['/module-editor/admin/file-editor'],
             'sortOrder' => 200,
-            'isActive' => MenuLink::isActiveState('{module_id}', 'admin', 'file-editor'),
+            'isActive' => MenuLink::isActiveState('module-editor', 'admin', 'file-editor'),
             'isVisible' => true
         ]));
 
