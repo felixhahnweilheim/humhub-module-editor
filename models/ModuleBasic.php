@@ -7,7 +7,7 @@ use yii\helpers\FileHelper;
 
 class ModuleBasic extends \yii\base\Model
 {
-    private const MODULE_TEMPLATE;
+    private const MODULE_TEMPLATE = '@module-editor/templates/base';
     
     public $modulePath;
     public $moduleId;
