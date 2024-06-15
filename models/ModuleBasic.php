@@ -13,8 +13,18 @@ class ModuleBasic extends \yii\base\Model
     public function rules(): array
     {
         return [
-            [['moduleId', 'moduleTitle', 'moduleDescription'], 'string']
+            [['moduleId', 'moduleTitle', 'moduleDescription'], 'string'],
+            [['moduleId'], 'uniqueModuleId']
         ];
+    }
+    
+    public function uniqueModuleId(string $attribute, $params, $validator)
+    {
+        $modules = Yii::$app->moduleManager->getModules();
+        
+        if (isset($modules[$attribute])) {
+            $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'Module ID is already taken'));
+        }
     }
 
     public function attributeLabels(): array
