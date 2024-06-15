@@ -6,10 +6,14 @@ use Yii;
 
 class ModuleBasic extends \yii\base\Model
 {
-
+    public $moduleId;
+    public $moduleTitle;
+    public $moduleDescription;
+    
     public function rules(): array
     {
         return [
+            [['moduleId', 'moduleTitle', 'moduleDescription'], 'string']
         ];
     }
 
