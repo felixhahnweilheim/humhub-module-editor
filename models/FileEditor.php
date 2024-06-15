@@ -8,20 +8,20 @@ use yii\helpers\FileHelper;
 class FileEditor extends \yii\base\Model
 {
     public $moduleId;
-    public $filePath;
+    public $file;
     public $content;
     
     public function __construct(string $moduleId, string $file)
     {
         $this->moduleId = $moduleId;
-        $this->filePath = Yii::getAlias('@' . $moduleId . $file);
-        $this->content = file_get_contents($this->filePath);
+        $this->file = $file;
+        $this->content = file_get_contents($this->getFullPath());
     }
     
     public function rules(): array
     {
         return [
-            [['moduleId', 'filePath', 'content'], 'required']
+            [['moduleId', 'file', 'content'], 'required']
         ];
     }
 
@@ -31,9 +31,14 @@ class FileEditor extends \yii\base\Model
             return false;
         }
         
-        if (!file_put_contents($this->filePath, $this->content)) {
+        if (!file_put_contents($this->getFullPath, $this->content)) {
             return false;
         }
         return true;
+    }
+    
+    private function getFullPath(): string
+    {
+        return Yii::getAlias('@' . $moduleId . $file);
     }
 }
