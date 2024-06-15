@@ -1,6 +1,6 @@
 <?php
 
-namespace humhub\modules\module-creator\models;
+namespace humhub\modules\moduleEditor\models;
 
 use Yii;
 
