@@ -10,7 +10,7 @@ class Module extends \humhub\components\Module
     public $resourcesPath = 'resources';
     
     // Translatable Module Title
-    public function getTitle(): string
+    public function getName(): string
     {
         return Yii::t('{module_PascalCase}Module.admin', '{module_title}');
     }
