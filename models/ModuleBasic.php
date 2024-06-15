@@ -4,6 +4,7 @@ namespace humhub\modules\moduleEditor\models;
 
 use Yii;
 use yii\helpers\FileHelper;
+use yii\helpers\Inflector;
 
 class ModuleBasic extends \yii\base\Model
 {
@@ -13,12 +14,14 @@ class ModuleBasic extends \yii\base\Model
     public $moduleId;
     public $moduleTitle;
     public $moduleDescription;
+    public $moduleAuthor;
+    public $moduleMinHumHub;
     
     public function rules(): array
     {
         return [
             [['modulePath'], 'isModulePath'],
-            [['moduleId', 'moduleTitle', 'moduleDescription'], 'string'],
+            [['moduleId', 'moduleTitle', 'moduleDescription', 'moduleAuthor', 'moduleMinHumHub'], 'required'],
             [['moduleId'], 'uniqueModuleId']
         ];
     }
@@ -56,15 +59,36 @@ class ModuleBasic extends \yii\base\Model
             return false;
         }
         
+        $replaceData['{module_id}'] => $this->moduleId;
+        $replaceData['{module_title}'] => $this->moduleTitle;
+        $replaceData['{module_description}'] => $this->moduleDescription;
+        $replaceData['{module_camelCase}'] => Inflector::camelize($this->moduleId);
+        $replaceData['{module_PascalCase}'] => ucfirst($replaceData['{module_camelCase}']);
+        $replaceData['{module_minHumHub}'] => $this->moduleMinHumHub;
+        $replaceData['{module_author}'] => $this->moduleAuthor;
+        
         $src = Yii::getAlias(self::MODULE_TEMPLATE);
-        $dst = Yii::getAlias($this->modulePath);
+        $dst = Yii::getAlias($this->modulePath . '/' . $moduleId);
+        FileHelper::createDirectory($dst);
         FileHelper::copyDirectory($src, $dst);
         
-        // do something
-
+        $files = FileHelper::findFiles($dst);
+        foreach ($files as $file) {
+            self::insertModuleInfo($file, $replaceData);
+        }
         return true;
     }
     
+    private function insertModuleInfo($file, array $replaceData): void
+    {
+        $lines = file($file, FILE_IGNORE_NEW_LINES);
+        foreach($lines as $key => $line) {
+            
+            $lines[$key] = strtr($line, $replaceData);
+        }
+        $data = implode(PHP_EOL, $lines);
+        file_put_contents($file, $data);
+    }        
     
     public function getModulePaths(): array
     {
