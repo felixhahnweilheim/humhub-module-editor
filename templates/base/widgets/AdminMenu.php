@@ -15,7 +15,7 @@ class AdminMenu extends TabMenu
             'url' => ['/{module_id}/admin/index'],
             'sortOrder' => 100,
             'isActive' => MenuLink::isActiveState('{module_id}', 'admin', 'index'),
-            'isVisible' => true;
+            'isVisible' => true
         ]));
 
         parent::init();
