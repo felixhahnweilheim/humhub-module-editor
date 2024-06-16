@@ -20,7 +20,7 @@ class AdminMenu extends TabMenu
             'label' => Yii::t('ModuleEditorModule.admin', 'File Editor'),
             'url' => ['/module-editor'],
             'sortOrder' => 100,
-            'isActive' => MenuLink::isActiveState('module-editor', 'editor'),
+            'isActive' => MenuLink::isActiveState('module-editor', 'editor', 'index'),
             'isVisible' => true
         ]));
         
@@ -28,7 +28,7 @@ class AdminMenu extends TabMenu
             'label' => Yii::t('ModuleEditorModule.admin', 'Create New Module'),
             'url' => ['/module-editor/create'],
             'sortOrder' => 200,
-            'isActive' => MenuLink::isActiveState('module-editor', 'admin', 'index'),
+            'isActive' => MenuLink::isActiveState('module-editor', 'create', 'index'),
             'isVisible' => true
         ]));
 
