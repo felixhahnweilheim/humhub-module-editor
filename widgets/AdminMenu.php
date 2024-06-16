@@ -28,7 +28,7 @@ class AdminMenu extends TabMenu
             'label' => Yii::t('ModuleEditorModule.admin', 'File Editor'),
             'url' => ['/module-editor/admin/file-editor'],
             'sortOrder' => 200,
-            'isActive' => MenuLink::isActiveState('module-editor', 'admin', 'file-editor'),
+            'isActive' => MenuLink::isActiveState('module-editor', 'editor'),
             'isVisible' => true
         ]));
 

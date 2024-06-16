@@ -7,7 +7,7 @@ use yii\web\Controller;
 
 class Url extends BaseUrl
 {
-    public const ROUTE_ADMIN = '/module-editor/admin';
+    public const ROUTE_ADMIN = '/module-editor';
 
     public static function getConfigUrl(): string
     {
