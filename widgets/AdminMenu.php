@@ -17,18 +17,18 @@ class AdminMenu extends TabMenu
     public function init(): void
     {
         $this->addEntry(new MenuLink([
-            'label' => Yii::t('ModuleEditorModule.admin', 'General'),
-            'url' => ['/module-editor/admin/index'],
+            'label' => Yii::t('ModuleEditorModule.admin', 'File Editor'),
+            'url' => ['/module-editor'],
             'sortOrder' => 100,
-            'isActive' => MenuLink::isActiveState('module-editor', 'admin', 'index'),
+            'isActive' => MenuLink::isActiveState('module-editor', 'editor'),
             'isVisible' => true
         ]));
         
         $this->addEntry(new MenuLink([
-            'label' => Yii::t('ModuleEditorModule.admin', 'File Editor'),
-            'url' => ['/module-editor/admin/file-editor'],
+            'label' => Yii::t('ModuleEditorModule.admin', 'Create New Module'),
+            'url' => ['/module-editor/create'],
             'sortOrder' => 200,
-            'isActive' => MenuLink::isActiveState('module-editor', 'editor'),
+            'isActive' => MenuLink::isActiveState('module-editor', 'admin', 'index'),
             'isVisible' => true
         ]));
 

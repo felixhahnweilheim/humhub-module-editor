@@ -5,7 +5,7 @@ namespace humhub\modules\moduleEditor\controllers;
 use humhub\modules\moduleEditor\models\ModuleBasic;
 use Yii;
 
-class AdminController extends \humhub\modules\admin\components\Controller
+class CreateController extends \humhub\modules\admin\components\Controller
 {
     public $subLayout = '@module-editor/views/layouts/admin';
 
