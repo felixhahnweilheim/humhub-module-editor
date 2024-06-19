@@ -11,6 +11,11 @@ class Url extends BaseUrl
 
     public static function getConfigUrl(): string
     {
-        return static::toRoute(static::ROUTE_ADMIN);
+        return static::to([static::ROUTE_ADMIN]);
+    }
+	
+    public static function getEditorUrl(string $moduleId, string $file = '/Module.php')
+    {
+        return static::to([static::ROUTE_ADMIN, 'moduleId' => $moduleId, 'file' => $file]);
     }
 }
