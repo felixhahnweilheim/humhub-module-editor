@@ -11,7 +11,7 @@ use humhub\libs\Html;
     </div>
     <?php if (isset($model->response)): ?>
         <div>
-            <?= $response ?>
+            <?= $model->response ?>
         </div>
     <?php endif; ?>
     <div class="form-group">

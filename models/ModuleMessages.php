@@ -2,7 +2,7 @@
 
 namespace humhub\modules\moduleEditor\models;
 
-use humhub\modules\components\Module;
+use humhub\components\Module;
 use Yii;
 
 class ModuleMessages extends \yii\base\Model
@@ -19,8 +19,9 @@ class ModuleMessages extends \yii\base\Model
     
     public function moduleExists(string $attribute, $params, $validator)
     {
-        $module = Yii::$app->moduleManager->getModule($this->$attribute);
+        $module = Yii::$app->getModule($this->$attribute);
         if (!$module instanceof Module) {
+			\Yii::error('DEB F : ' . $this->$attribute);
             $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'Module not found.'));
         }
     }
@@ -46,7 +47,7 @@ class ModuleMessages extends \yii\base\Model
         $output = null;
         $return_val = null;
         
-        exec('php yii message/extract-module ' . $moduleId, $output, $return_val);
+        exec('php yii message/extract-module ' . $this->moduleId, $output, $return_val);
         
         $this->response = print_r($output);
         
