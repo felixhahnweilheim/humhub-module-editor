@@ -48,11 +48,10 @@ class ModuleMessages extends \yii\base\Model
         $output = null;
         $return_val = null;
         
-        ob_start();
         exec('cd ' . $path . ' && php yii message/extract-module ' . $this->moduleId . ' 2> /dev/null', $output, $return_val);
         
         $this->response = implode("\n", $output);
-        $this->response .= ob_get_clean();
+        
         if ($return_val === 0) {
             return true;
         }
