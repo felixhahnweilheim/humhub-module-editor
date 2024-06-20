@@ -9,7 +9,7 @@ class ToolsController extends \humhub\modules\admin\components\Controller
 {
     public $subLayout = '@module-editor/views/layouts/admin';
 
-    public function actionIndex(): string
+    public function actionMessages(): string
     {
         $form = new ModuleMessages();
 
@@ -17,6 +17,6 @@ class ToolsController extends \humhub\modules\admin\components\Controller
             $form->save();
         }
 
-        return $this->render('index', ['model' => $form]);
+        return $this->render('messages', ['model' => $form]);
     }
 }

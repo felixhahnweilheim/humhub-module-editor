@@ -7,8 +7,8 @@ use Yii;
 
 class ModuleMessages extends \yii\base\Model
 {
-    public string $moduleId;
-    public string $response = null;
+    public $moduleId;
+    public ?string $response = null;
     
     public function rules(): array
     {
@@ -17,11 +17,11 @@ class ModuleMessages extends \yii\base\Model
         ];
     }
     
-    public function moduleExists(string $moduleId)
+    public function moduleExists(string $attribute, $params, $validator)
     {
-        $module = Yii::$app->moduleManager->getModule($moduleId);
+        $module = Yii::$app->moduleManager->getModule($this->$attribute);
         if (!$module instanceof Module) {
-            $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'Module ID is already taken.'));
+            $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'Module not found.'));
         }
     }
     
