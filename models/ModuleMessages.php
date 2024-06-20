@@ -47,9 +47,9 @@ class ModuleMessages extends \yii\base\Model
         $output = null;
         $return_val = null;
         
-        exec('php yii message/extract-module ' . $this->moduleId, $output, $return_val);
+        exec('php yii message/extract-module ' . $this->moduleId . ' 2> /dev/null', $output, $return_val);
         
-        $this->response = print_r($output);
+        $this->response = implode("/n", $output);
         
         return true;
     }
