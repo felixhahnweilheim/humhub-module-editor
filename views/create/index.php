@@ -18,6 +18,6 @@ use humhub\libs\Html;
         <?= $form->field($model, 'moduleAuthor'); ?>
     </div>
     <div class="form-group">
-        <?= Html::submitButton(\Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>
+        <?= Html::submitButton(Yii::t('ModuleEditorModule.admin', 'Create Module'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>
     </div>
 <?php ActiveForm::end(); ?>
