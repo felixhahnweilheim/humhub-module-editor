@@ -44,13 +44,17 @@ class ModuleMessages extends \yii\base\Model
             return false;
         }
         
+        $path = Yii::getAlias('@app');
         $output = null;
         $return_val = null;
         
-        exec('php yii message/extract-module ' . $this->moduleId . ' 2> /dev/null', $output, $return_val);
+        exec('cd ' . $path . ' && php yii message/extract-module ' . $this->moduleId . ' 2> /dev/null', $output, $return_val);
         
-        $this->response = implode("/n", $output);
+        $this->response = implode("\n", $output);
         
-        return true;
+        if ($return_val === 0) {
+            return true;
+        }
+        return false;
     }
 }

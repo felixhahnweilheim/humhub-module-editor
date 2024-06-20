@@ -11,7 +11,10 @@ use humhub\libs\Html;
     </div>
     <?php if (isset($model->response)): ?>
         <div>
-            <?= $model->response ?>
+            <b><?= Yii::t('ModuleEditorModule.admin', 'Response') ?></b>
+            <pre>
+                <?= $model->response ?>
+            </pre>
         </div>
     <?php endif; ?>
     <div class="form-group">
