@@ -1,13 +1,17 @@
 <?php
 
+use humhub\modules\moduleEditor\assets\AceAssets;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\libs\Html;
+use \yii\web\View;
 
-$this->registerJS('var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/javascript");');
-
+AceAssets::register($this);
 ?>
+
+<div id="editor">function foo(items) {
+    var x = "All this is syntax highlighted";
+    return x;
+}</div>
 
 <p><details>
     <summary style="display:list-item;margin-bottom:1em">
@@ -35,7 +39,7 @@ $this->registerJS('var editor = ace.edit("editor");
 
 <?php $form = ActiveForm::begin(['id' => 'admin-index-form']); ?>
     <div class="form-group">
-        <?= $form->field($model, 'content')->textarea(['rows' => 20, 'id' => 'editor']); ?>
+        <?= $form->field($model, 'content')->textarea(['rows' => 20]); ?>
     </div>
     <div class="form-group">
         <?= Html::submitButton(\Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>

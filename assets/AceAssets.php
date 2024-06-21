@@ -13,4 +13,14 @@ class AceAssets extends \humhub\components\assets\AssetBundle
     public $js = [
         'js/ace.js',
     ];
+
+    public static function register($view)
+    {
+        $view->registerJS('
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.session.setMode("ace/mode/javascript");
+        ');
+        return parent::register($view);
+    }
 }
