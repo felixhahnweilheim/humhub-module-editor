@@ -8,11 +8,6 @@ use \yii\web\View;
 AceAssets::register($this);
 ?>
 
-<div id="editor">function foo(items) {
-    var x = "All this is syntax highlighted";
-    return x;
-}</div>
-
 <p><details>
     <summary style="display:list-item;margin-bottom:1em">
         <b><?= Yii::t('ModuleEditorModule.admin', 'Module:'); ?></b> <?= $model->moduleId ?> 
@@ -39,7 +34,7 @@ AceAssets::register($this);
 
 <?php $form = ActiveForm::begin(['id' => 'admin-index-form']); ?>
     <div class="form-group">
-        <?= $form->field($model, 'content')->textarea(['rows' => 20]); ?>
+        <?= $form->field($model, 'content')->textarea(['rows' => 20, 'id' => 'editor']); ?>
     </div>
     <div class="form-group">
         <?= Html::submitButton(\Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>
