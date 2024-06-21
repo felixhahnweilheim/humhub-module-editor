@@ -8,7 +8,7 @@ use yii\web\Controller;
 class Url extends BaseUrl
 {
     public const ROUTE_EDITOR = '/module-editor';
-    public const ROUTE_ADMIN = '/module-editor/create';
+    public const ROUTE_CREATE = '/module-editor/create';
     public const ROUTE_TOOLS = '/module-editor/tools';
 
     public static function getConfigUrl(): string
