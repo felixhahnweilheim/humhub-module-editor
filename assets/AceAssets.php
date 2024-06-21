@@ -27,7 +27,7 @@ class AceAssets extends \humhub\components\assets\AssetBundle
             View::POS_END
         );
         $view->registerCSS(
-            '#editor { 
+            '#fileeditor-content { 
                 position: absolute;
                 top: 0;
                 right: 0;
