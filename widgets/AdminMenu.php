@@ -2,7 +2,7 @@
 
 namespace humhub\modules\moduleEditor\widgets;
 
-use humhub\modules\helpers\Url;
+use humhub\modules\moduleEditor\helpers\Url;
 use Yii;
 use humhub\modules\ui\menu\MenuLink;
 use humhub\modules\ui\menu\widgets\TabMenu;
