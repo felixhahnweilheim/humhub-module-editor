@@ -23,7 +23,7 @@ class AceAssets extends \humhub\components\assets\AssetBundle
         $view->registerJS(
             'var editor = ace.edit("editor");
             editor.setTheme("ace/theme/monokai");
-            editor.session.setMode("ace/mode/javascript")',
+            editor.session.setMode("ace/mode/php")',
             View::POS_END
         );
         $view->registerCSS(
