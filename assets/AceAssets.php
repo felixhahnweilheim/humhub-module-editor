@@ -21,13 +21,19 @@ class AceAssets extends \humhub\components\assets\AssetBundle
     public static function register($view)
     {
         $view->registerJS(
-            'var editor = ace.edit("fileeditor-content");
+            'var editor = ace.edit("editor");
             editor.setTheme("ace/theme/monokai");
-            editor.session.setMode("ace/mode/php")',
+            editor.session.setMode("ace/mode/php")
+            
+            var textarea = $(\'textarea[name="ModuleEditor[content]"]\').hide();
+            editor.getSession().setValue(textarea.val());
+            editor.getSession().on(\'change\', function(){
+                textarea.val(editor.getSession().getValue());
+            });',
             View::POS_END
         );
         $view->registerCSS(
-            '#fileeditor-content { 
+            '#editor { 
                 position: absolute;
                 top: 0;
                 right: 0;

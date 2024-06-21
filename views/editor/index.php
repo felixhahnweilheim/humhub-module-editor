@@ -34,7 +34,8 @@ AceAssets::register($this);
 
 <?php $form = ActiveForm::begin(['id' => 'admin-index-form']); ?>
     <div class="form-group" style="position:relative;width:100%;height:500px;">
-        <div id="fileeditor-content"><?= htmlspecialchars($model->content) ?></div>
+        <?= $form->field($model, 'content')->textarea(); ?>
+        <div id="editor"><?= htmlspecialchars($model->content) ?></div>
     </div>
     <div class="form-group">
         <?= Html::submitButton(\Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>
