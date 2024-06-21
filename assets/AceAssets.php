@@ -21,7 +21,7 @@ class AceAssets extends \humhub\components\assets\AssetBundle
     public static function register($view)
     {
         $view->registerJS(
-            'var editor = ace.edit("editor");
+            'var editor = ace.edit("fileeditor-content");
             editor.setTheme("ace/theme/monokai");
             editor.session.setMode("ace/mode/php")',
             View::POS_END
