@@ -3,6 +3,10 @@
 use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\libs\Html;
 
+$this->registerJS('var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/javascript");');
+
 ?>
 
 <p><details>
@@ -31,7 +35,7 @@ use humhub\libs\Html;
 
 <?php $form = ActiveForm::begin(['id' => 'admin-index-form']); ?>
     <div class="form-group">
-        <?= $form->field($model, 'content')->textarea(['rows' => 20]); ?>
+        <?= $form->field($model, 'content')->textarea(['rows' => 20, 'id' => 'editor']); ?>
     </div>
     <div class="form-group">
         <?= Html::submitButton(\Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>
