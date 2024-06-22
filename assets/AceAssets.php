@@ -22,7 +22,7 @@ class AceAssets extends \humhub\components\assets\AssetBundle
     public static function addAssetsFor($view, string $fileType)
     {
         if (isset(FileEditor::ACE_MODES[$fileType])) {
-            $mode = FileEditor::ACE_MODES[$fileType]);
+            $mode = FileEditor::ACE_MODES[$fileType];
         } else {
             $mode = 'text';
         }
