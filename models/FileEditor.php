@@ -19,7 +19,6 @@ class FileEditor extends \yii\base\Model
         'md' => 'markdown',
         'php' => 'php',
         'sh' => 'sh',
-        'xml' => 'xml',
         'yaml' => 'yaml'
     ];
     
@@ -51,7 +50,7 @@ class FileEditor extends \yii\base\Model
     
     public function knownFileType(string $attribute, $params, $validator)
     {
-        if (!isset(self::ACE_MODES[$this->$attribute])) {
+        if (!isset(self::ACE_MODES[$this->extension])) {
             if (mime_content_type($this->getFullPath()) !== 'text/plain') {
                 $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'File Type not supported.'));
             }
