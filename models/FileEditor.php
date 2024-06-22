@@ -12,6 +12,7 @@ class FileEditor extends \yii\base\Model
 
     public $moduleId;
     public $file;
+    public $oldFile;
     public $content;
     public $extension;
 
@@ -23,6 +24,7 @@ class FileEditor extends \yii\base\Model
             throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'This file type is not supported!'));
         }
         $this->file = $file;
+        $this->oldFile = $this->file;
         $this->content = file_get_contents($this->getFullPath());
     }
 
@@ -41,6 +43,11 @@ class FileEditor extends \yii\base\Model
         
         if (!file_put_contents($this->getFullPath(), $this->content)) {
             return false;
+        }
+        
+        // Rename: If File name was changed, delete old file
+        if ($this->file !== $this->oldFile) {
+            unlink($this->getFullPathOld());
         }
         return true;
     }
@@ -70,11 +77,17 @@ class FileEditor extends \yii\base\Model
         if ($excludeCurrentUrl) {
             $result[$this->file] = '';
         }
+        ksort($result, SORT_STRING);
         return $result;
     }
     
     private function getFullPath(): string
     {
         return Yii::getAlias('@' . $this->moduleId . $this->file);
+    }
+    
+    private function getFullPathOld(): string
+    {
+        return Yii::getAlias('@' . $this->moduleId . $this->oldFile);
     }
 }

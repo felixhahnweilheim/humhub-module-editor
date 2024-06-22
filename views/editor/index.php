@@ -20,7 +20,7 @@ AceAssets::addAssetsFor($this, $model->extension);
 
 <p><details>
     <summary style="display:list-item;margin-bottom:1em">
-        <b><?= Yii::t('ModuleEditorModule.admin', 'File:')?></b> <?= $model->file ?>
+        <b><?= Yii::t('ModuleEditorModule.admin', 'File Navigator')?></b>
     </summary>
 
     <?php foreach($model->getFilesUrls(true) as $file => $url): ?>
@@ -33,6 +33,9 @@ AceAssets::addAssetsFor($this, $model->extension);
 </details></p>
 
 <?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
+    <div class="form-group">
+        <?= $form->field($model, 'file'); ?>
+    </div>
     <div class="form-group" style="position:relative;width:100%;height:500px;">
         <?= $form->field($model, 'content')->textarea(); ?>
         <div id="editor"><?= htmlspecialchars($model->content) ?></div>
