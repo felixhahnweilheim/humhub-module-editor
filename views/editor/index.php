@@ -5,7 +5,7 @@ use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\libs\Html;
 use \yii\web\View;
 
-AceAssets::register($this);
+AceAssets::addAssetsFor($this, $model->extension);
 ?>
 
 <p><details>

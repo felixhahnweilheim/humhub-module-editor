@@ -13,12 +13,13 @@ class FileEditor extends \yii\base\Model
     public $moduleId;
     public $file;
     public $content;
+    public $extension;
 
     public function __construct(string $moduleId, string $file)
     {
         $this->moduleId = $moduleId;
-        $ext= pathinfo($file, PATHINFO_EXTENSION);
-        if (!in_array($ext, self::ALLOWED_FORMATS)) {
+        $this->extension = pathinfo($file, PATHINFO_EXTENSION);
+        if (!in_array($this->extension, self::ALLOWED_FORMATS)) {
             throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'This file type is not supported!'));
         }
         $this->file = $file;
