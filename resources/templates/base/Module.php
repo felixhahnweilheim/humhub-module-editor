@@ -12,13 +12,13 @@ class Module extends \humhub\components\Module
     // Translatable Module Title
     public function getName(): string
     {
-        return Yii::t('{module_PascalCase}Module.admin', '{module_title}');
+        return Yii::t('{module_translation_base}.admin', '{module_title}');
     }
 
     // Translatable Module Description
     public function getDescription(): string
     {
-        return Yii::t('{module_PascalCase}Module.admin', '{module_description}');
+        return Yii::t('{module_translation_base}.admin', '{module_description}');
     }
 
     // Link to configuration page

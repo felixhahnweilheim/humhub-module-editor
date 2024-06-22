@@ -11,7 +11,7 @@ class AdminMenu extends TabMenu
     public function init()
     {
         $this->addEntry(new MenuLink([
-            'label' => Yii::t('{module_PascalCase}Module.admin', 'General'),
+            'label' => Yii::t('{module_translation_base}.admin', 'General'),
             'url' => ['/{module_id}/admin/index'],
             'sortOrder' => 100,
             'isActive' => MenuLink::isActiveState('{module_id}', 'admin', 'index'),
