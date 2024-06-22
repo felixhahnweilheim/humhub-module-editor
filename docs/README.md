@@ -5,7 +5,7 @@
 So be careful, have a backup at hand and another way to edit files in case something went wrong.
 
 ## Editor
-Edit module files with the javascript-based ACE editor.
+Edit module files with the javascript-based ACE editor (including syntax highlighting, code folding, syntax warnings and more).
 The following file types are supported:
 
 - php, html
