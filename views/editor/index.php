@@ -32,7 +32,7 @@ AceAssets::register($this);
     <?php endforeach; ?>
 </details></p>
 
-<?php $form = ActiveForm::begin(['id' => 'admin-index-form']); ?>
+<?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
     <div class="form-group" style="position:relative;width:100%;height:500px;">
         <?= $form->field($model, 'content')->textarea(); ?>
         <div id="editor"><?= htmlspecialchars($model->content) ?></div>

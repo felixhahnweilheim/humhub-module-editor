@@ -13,7 +13,7 @@ class FileEditor extends \yii\base\Model
     public $moduleId;
     public $file;
     public $content;
-    
+
     public function __construct(string $moduleId, string $file)
     {
         $this->moduleId = $moduleId;
@@ -24,7 +24,7 @@ class FileEditor extends \yii\base\Model
         $this->file = $file;
         $this->content = file_get_contents($this->getFullPath());
     }
-    
+
     public function rules(): array
     {
         return [
@@ -43,7 +43,7 @@ class FileEditor extends \yii\base\Model
         }
         return true;
     }
-	
+    
     public function getModulesUrls(bool $excludeCurrent = false): array
     {
         $result = [];
@@ -56,7 +56,7 @@ class FileEditor extends \yii\base\Model
         }
         return $result;
     }
-        
+    
     public function getFilesUrls(bool $excludeCurrentUrl = false): array
     {
         $result = [];
@@ -70,7 +70,7 @@ class FileEditor extends \yii\base\Model
             $result[$this->file] = '';
         }
         return $result;
-}
+    }
     
     private function getFullPath(): string
     {
