@@ -37,6 +37,7 @@ class AceAssets extends \humhub\components\assets\AssetBundle
             editor.session.setMode("ace/mode/' . $mode . '");
             editor.session.setUseWrapMode(true);
             editor.session.setTabSize(4);
+            editor.setOption("showInvisibles", true);
             editor.session.setUseSoftTabs(true);
             editor.session.on("change", function(delta){
                 document.forms["file-editor-form"]["FileEditor[content]"].value = editor.getValue();
