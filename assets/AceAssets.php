@@ -2,6 +2,7 @@
 
 namespace humhub\modules\moduleEditor\assets;
 
+use humhub\modules\moduleEditor\models\FileEditor;
 use \yii\web\View;
 
 class AceAssets extends \humhub\components\assets\AssetBundle
@@ -20,16 +21,10 @@ class AceAssets extends \humhub\components\assets\AssetBundle
     
     public static function addAssetsFor($view, string $fileType)
     {
-        switch ($fileType) {
-            case 'php':
-                $mode = 'php';
-                break;
-            case 'js':
-                $mode = 'javascript';
-                break;
-            default:
-                $mode = 'text';
-                break;
+        if (isset(FileEditor::ACE_MODES[$fileType])) {
+            $mode = FileEditor::ACE_MODES[$fileType]);
+        } else {
+            $mode = 'text';
         }
         $view->registerJS(
             'var editor = ace.edit("editor");

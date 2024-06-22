@@ -8,8 +8,21 @@ use yii\helpers\FileHelper;
 
 class FileEditor extends \yii\base\Model
 {
-    public const ALLOWED_FORMATS = ['php', 'json', 'md', 'css', 'js', 'html', 'htm', 'xsl', 'sh', 'txt', 'yml'];
-
+    public const ACE_MODES = [
+        'css' => 'css',
+        'gitignore' => 'gitignore',
+        'html' => 'html',
+        'htm' => 'html',
+        'js' => 'javascript',
+        'json' => 'json',
+        'less' => 'less',
+        'md' => 'markdown',
+        'php' => 'php',
+        'sh' => 'sh',
+        'xml' => 'xml',
+        'yaml' => 'yaml'
+    ];
+    
     public $moduleId;
     public $file;
     public $oldFile;
@@ -20,19 +33,29 @@ class FileEditor extends \yii\base\Model
     {
         $this->moduleId = $moduleId;
         $this->extension = pathinfo($file, PATHINFO_EXTENSION);
-        if (!in_array($this->extension, self::ALLOWED_FORMATS)) {
-            throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'This file type is not supported!'));
-        }
         $this->file = $file;
         $this->oldFile = $this->file;
         $this->content = file_get_contents($this->getFullPath());
+        if (!$this->validate()) {
+            throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'This file type is not supported!'));
+        }
     }
 
     public function rules(): array
     {
         return [
-            [['moduleId', 'file', 'content'], 'required']
+            [['moduleId', 'file', 'content'], 'required'],
+            [['file'], 'knownFileType']
         ];
+    }
+    
+    public function knownFileType(string $attribute, $params, $validator)
+    {
+        if (!isset(self::ACE_MODES[$this->$attribute])) {
+            if (mime_content_type($this->getFullPath()) !== 'text/plain') {
+                $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'File Type not supported.'));
+            }
+        }
     }
 
     public function save(): bool
