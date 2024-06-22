@@ -8,7 +8,7 @@ use yii\helpers\Inflector;
 
 class ModuleBasic extends \yii\base\Model
 {
-    private const MODULE_TEMPLATE = '@module-editor/templates/base';
+    private const MODULE_TEMPLATE = '@module-editor/resources/templates/base';
     
     public $modulePath;
     public $moduleId;

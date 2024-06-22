@@ -6,14 +6,14 @@ use \yii\web\View;
 
 class AceAssets extends \humhub\components\assets\AssetBundle
 {
-    public $sourcePath = '@module-editor/resources';
+    public $sourcePath = '@module-editor/resources/ace';
 
     public $publishOptions = [
         'forceCopy' => false
     ];
 
     public $js = [
-        'js/ace.js',
+        'ace.js',
     ];
     
     public $defer = false;
@@ -35,7 +35,9 @@ class AceAssets extends \humhub\components\assets\AssetBundle
             'var editor = ace.edit("editor");
             editor.setTheme("ace/theme/monokai");
             editor.session.setMode("ace/mode/' . $mode . '");
-            editor.session.setUseWrapMode(true)
+            editor.session.setUseWrapMode(true);
+            editor.session.setTabSize(4);
+            editor.session.setUseSoftTabs(true);
             editor.session.on("change", function(delta){
                 document.forms["file-editor-form"]["FileEditor[content]"].value = editor.getValue();
             });',
