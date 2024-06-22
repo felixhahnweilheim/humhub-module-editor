@@ -60,12 +60,12 @@ class ModuleBasic extends \yii\base\Model
         }
         
         $replaceData['{module_id}'] = $this->moduleId;
-        $replaceData['{module_title}'] = json_encode($this->moduleTitle);
-        $replaceData['{module_description}'] = json_encode($this->moduleDescription);
+        $replaceData['{module_title}'] = addslashes($this->moduleTitle);
+        $replaceData['{module_description}'] = addslashes($this->moduleDescription);
         $replaceData['{module_camelCase}'] = Inflector::variablize($this->moduleId);
         $replaceData['{module_translation_base}'] = Inflector::camelize($this->moduleId) . 'Module';
-        $replaceData['{module_minHumHub}'] = json_encode($this->moduleMinHumHub);
-        $replaceData['{module_author}'] = json_encode($this->moduleAuthor);
+        $replaceData['{module_minHumHub}'] = addslashes($this->moduleMinHumHub);
+        $replaceData['{module_author}'] = addslashes($this->moduleAuthor);
         
         $src = Yii::getAlias(self::MODULE_TEMPLATE);
         $dst = Yii::getAlias($this->modulePath . '/' . $this->moduleId);
