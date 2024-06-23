@@ -44,6 +44,12 @@ class ModuleBasic extends \yii\base\Model
     public function attributeLabels(): array
     {
         return [
+            'modulePath' => Yii::t('ModuleEditorModule.admin', 'Module Loader Path'),
+            'moduleId' => Yii::t('ModuleEditorModule.admin', 'ID'),
+            'moduleTitle' => Yii::t('ModuleEditorModule.admin', 'Title'),
+            'moduleDescription' => Yii::t('ModuleEditorModule.admin', 'Description'),
+            'moduleAuthor' => Yii::t('ModuleEditorModule.admin', 'Author'),
+            'moduleMinHumHub' => Yii::t('ModuleEditorModule.admin', 'Minimum HumHub version'),
         ];
     }
 

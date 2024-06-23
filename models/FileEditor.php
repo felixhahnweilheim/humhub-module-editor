@@ -36,7 +36,7 @@ class FileEditor extends \yii\base\Model
         $this->oldFile = $this->file;
         $this->content = file_get_contents($this->getFullPath());
         if (!$this->validate()) {
-            throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'This file type is not supported!'));
+            throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'This file type is not supported.'));
         }
     }
 
@@ -52,9 +52,23 @@ class FileEditor extends \yii\base\Model
     {
         if (!isset(self::ACE_MODES[$this->extension])) {
             if (mime_content_type($this->getFullPath()) !== 'text/plain') {
-                $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'File Type not supported.'));
+                $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'This file type is not supported.'));
             }
         }
+    }
+    
+    public function attributeLabels(): array
+    {
+        return [
+            'file' => Yii::t('ModuleEditorModule.admin', 'File')
+        ];
+    }
+    
+    public function attributeHints(): array
+    {
+        return [
+            'file' => Yii::t('ModuleEditorModule.admin', 'including the path relative to the module base directory')
+        ];
     }
 
     public function save(): bool

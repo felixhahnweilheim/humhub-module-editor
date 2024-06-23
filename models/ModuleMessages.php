@@ -29,6 +29,7 @@ class ModuleMessages extends \yii\base\Model
     public function attributeLabels(): array
     {
         return [
+            'moduleId' => Yii::t('ModuleEditorModule.admin', 'Module ID'),
         ];
     }
 

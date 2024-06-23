@@ -3,7 +3,7 @@
 namespace humhub\modules\moduleEditor\assets;
 
 use humhub\modules\moduleEditor\models\FileEditor;
-use \yii\web\View;
+use yii\web\View;
 
 class AceAssets extends \humhub\components\assets\AssetBundle
 {
@@ -21,6 +21,7 @@ class AceAssets extends \humhub\components\assets\AssetBundle
     
     public static function addAssetsFor($view, string $fileType)
     {
+        $success = parent::register($view);
         if (isset(FileEditor::ACE_MODES[$fileType])) {
             $mode = FileEditor::ACE_MODES[$fileType];
         } else {
@@ -48,6 +49,6 @@ class AceAssets extends \humhub\components\assets\AssetBundle
                 left: 0;
             }'
         );
-        return parent::register($view);
+        return $success;
     }
 }

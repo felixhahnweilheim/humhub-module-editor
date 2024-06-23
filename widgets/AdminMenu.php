@@ -26,7 +26,7 @@ class AdminMenu extends TabMenu
         ]));
         
         $this->addEntry(new MenuLink([
-            'label' => Yii::t('ModuleEditorModule.admin', 'Create New Module'),
+            'label' => Yii::t('ModuleEditorModule.admin', 'New Module'),
             'url' => Url::getCreateUrl(),
             'sortOrder' => 200,
             'isActive' => MenuLink::isActiveState('module-editor', 'create', 'index'),
