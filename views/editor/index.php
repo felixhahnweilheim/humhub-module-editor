@@ -1,11 +1,13 @@
 <?php
 
 use humhub\modules\moduleEditor\assets\AceAssets;
+use humhub\modules\moduleEditor\assets\NavigatorAssets;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\libs\Html;
 use \yii\web\View;
 
 AceAssets::addAssetsFor($this, $model->extension);
+NavigatorAssets::register($this);
 ?>
 
 <?= $model->getModuleNavigatorHtml() ?>
