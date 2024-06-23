@@ -9,9 +9,10 @@ use \yii\web\View;
 AceAssets::addAssetsFor($this, $model->extension);
 NavigatorAssets::register($this);
 ?>
-
-<?= $model->getModuleNavigatorHtml() ?>
-<?= $model->getFileNavigatorHtml() ?>
+<div class="module-editor-nav-container">
+    <?= $model->getModuleNavigatorHtml() ?>
+    <?= $model->getFileNavigatorHtml() ?>
+</div>
 
 <?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
     <div class="form-group">
