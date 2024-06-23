@@ -90,43 +90,65 @@ class FileEditor extends \yii\base\Model
     
     public function getModuleNavigatorHtml(): string
     {
-        $result = '<p><details>
-    <summary style="display:list-item;margin-bottom:1em">
-        <b>' . Yii::t('ModuleEditorModule.admin', 'Module:') . ' </b>' . $this->moduleId . 
-   '</summary>';
+        $result = '<details><summary><b>' . Yii::t('ModuleEditorModule.admin', 'Module:') . ' </b>' . $this->moduleId . '</summary>';
         
         $modules = Yii::$app->moduleManager->getModules();
         foreach ($modules as $id => $module) {
             $result .= '<p><a href="' . Url::getEditorUrl($id)  . '">' . $id . '</a> - ' . $module->getName() . '</p>';
         }
-        
-        $result .= '</details></p>';
+        $result .= '</details>';
         
         return $result;
     }
     
     public function getFileNavigatorHtml(): string
     {
-        $result = '<p><details>
-    <summary style="display:list-item;margin-bottom:1em">
-        <b>' . Yii::t('ModuleEditorModule.admin', 'File Navigator') . '</b>
-    </summary>';
+        $result = '<details><summary><b>' . Yii::t('ModuleEditorModule.admin', 'File Navigator') . '</b></summary>';
     
-        $path = Yii::getAlias('@' . $this->moduleId);
-        $files = FileHelper::findFiles($path);
+        $result .= self::dirToHtml($this->getBasePath());
         
-        foreach ($files as $file) {
-            $file = str_replace($path, '', $file);
-            if ($file === $this->file) {
-                $result .= '<p>' . $file . '</p>';
-            } else {
-                $result .=  '<p><a href="' .  Url::getEditorUrl($this->moduleId, $file) . '">' . $file  . '</a></p>';
-            }
-        }
-        
-        $result .= '</details></p>';
+        $result .= '</details>';
         
         return $result;
+    }
+    
+    private function dirToHtml(string $dir): string
+    {
+        $result = '';
+        
+        // relative to module path
+        $relDir = str_replace($this->getBasePath(), '', $dir);
+        
+        $cdir = scandir($dir);
+        $files = [];
+        $subdirs = [];
+        foreach ($cdir as $key => $value)
+        {
+            if (!in_array($value, [".",".."]))
+            {
+                if (is_dir($dir . DIRECTORY_SEPARATOR . $value))
+                {
+                    $subdirs[] = $value;
+                } else {
+                    $files[] = $value;
+                }
+            }
+        }
+        foreach ($files as $file) {
+            $result .= '<p><a href="' . Url::getEditorUrl($this->moduleId, $relDir . DIRECTORY_SEPARATOR . $file) . '">' . $file  . '</a></p>';
+        }
+        foreach ($subdirs as $subdir) {
+            $result .= "<details><summary>$subdir</summary>";
+            $result .= self::dirToHtml($dir . DIRECTORY_SEPARATOR . $subdir);
+            $result .= "</details>";
+        }
+        
+        return $result;
+    }
+    
+    private function getBasePath(): string
+    {
+        return Yii::getAlias('@' . $this->moduleId);
     }
     
     private function getFullPath(): string
