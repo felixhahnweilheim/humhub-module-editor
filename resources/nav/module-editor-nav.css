@@ -1,5 +1,8 @@
 .module-editor-nav-container {
-    width: 100%;
+    position: absolute;
+    right: 0px;
+    top: 60px;
+    z-index: 999;
 }
 .module-editor-nav {
     float: left;
