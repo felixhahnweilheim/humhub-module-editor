@@ -1,0 +1,19 @@
+.module-editor-nav {
+	padding: 10px;
+}
+.module-editor-nav details {
+  padding: 0 0 0 5px;
+  border-radius: 7px;
+	margin: 0px 10px 20px;
+  background: var(--background-color-highlight-soft);
+}
+.module-editor-nav details summary {
+  display: list-item;
+  border-bottom: 1px solid var(--default);
+  margin: 10px 0;
+}
+
+.module-editor-nav details p {
+  padding-left: 10px;
+  margin: 10px 0;
+}
