@@ -1,19 +1,22 @@
 .module-editor-nav {
-	padding: 10px;
+    padding: 10px;
+    background: var(--background-color-highlight-soft);
+    border-radius: 7px;
+    width: 300px;
+    margin: 0px 10px 20px;
 }
 .module-editor-nav details {
-  padding: 0 0 0 5px;
-  border-radius: 7px;
-	margin: 0px 10px 20px;
-  background: var(--background-color-highlight-soft);
+    padding: 0 0 0 5px;
+    margin: 0px 10px 20px;
+}
+details.module-editor-nav summary {
+    display: list-item;
+    border-bottom: 1px solid var(--default);
 }
 .module-editor-nav details summary {
-  display: list-item;
-  border-bottom: 1px solid var(--default);
-  margin: 10px 0;
+    margin: 10px 0;
 }
-
-.module-editor-nav details p {
-  padding-left: 10px;
-  margin: 10px 0;
+details.module-editor-nav p {
+    padding-left: 10px;
+    margin: 10px 0;
 }
