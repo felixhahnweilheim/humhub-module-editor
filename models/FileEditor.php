@@ -88,32 +88,44 @@ class FileEditor extends \yii\base\Model
         return true;
     }
     
-    public function getModulesUrls(bool $excludeCurrent = false): array
+    public function getModuleNavigatorHtml(): string
     {
-        $result = [];
+        $result = '<p><details>
+    <summary style="display:list-item;margin-bottom:1em">
+        <b>' . Yii::t('ModuleEditorModule.admin', 'Module:') . ' </b>' . $this->moduleId . 
+   '</summary>';
+        
         $modules = Yii::$app->moduleManager->getModules();
         foreach ($modules as $id => $module) {
-            $result[$id] = Url::getEditorUrl($id);
+            $result .= '<p><a href="' . Url::getEditorUrl($id)  . '">' . $id . '</a> - ' . $module->getName() . '</p>';
         }
-        if ($excludeCurrent) {
-            unset($result[$this->moduleId]);
-        }
+        
+        $result .= '</details></p>';
+        
         return $result;
     }
     
-    public function getFilesUrls(bool $excludeCurrentUrl = false): array
+    public function getFileNavigatorHtml(): string
     {
-        $result = [];
+        $result = '<p><details>
+    <summary style="display:list-item;margin-bottom:1em">
+        <b>' . Yii::t('ModuleEditorModule.admin', 'File Navigator') . '</b>
+    </summary>';
+    
         $path = Yii::getAlias('@' . $this->moduleId);
         $files = FileHelper::findFiles($path);
+        
         foreach ($files as $file) {
             $file = str_replace($path, '', $file);
-            $result[$file] = Url::getEditorUrl($this->moduleId, $file);
+            if ($file === $this->file) {
+                $result .= '<p>' . $file . '</p>';
+            } else {
+                $result .=  '<p><a href="' .  Url::getEditorUrl($this->moduleId, $file) . '">' . $file  . '</a></p>';
+            }
         }
-        if ($excludeCurrentUrl) {
-            $result[$this->file] = '';
-        }
-        ksort($result, SORT_STRING);
+        
+        $result .= '</details></p>';
+        
         return $result;
     }
     

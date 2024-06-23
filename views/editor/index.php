@@ -8,29 +8,8 @@ use \yii\web\View;
 AceAssets::addAssetsFor($this, $model->extension);
 ?>
 
-<p><details>
-    <summary style="display:list-item;margin-bottom:1em">
-        <b><?= Yii::t('ModuleEditorModule.admin', 'Module:'); ?></b> <?= $model->moduleId ?> 
-   </summary>
-
-    <?php foreach($model->getModulesUrls(true) as $id => $url): ?>
-        <p><a href="<?= $url ?>"><?= $id ?></a></p>
-    <?php endforeach; ?>
-</details></p>
-
-<p><details>
-    <summary style="display:list-item;margin-bottom:1em">
-        <b><?= Yii::t('ModuleEditorModule.admin', 'File Navigator')?></b>
-    </summary>
-
-    <?php foreach($model->getFilesUrls(true) as $file => $url): ?>
-        <?php if (!empty($url)): ?>
-            <p><a href="<?= $url ?>"><?= $file ?></a></p>
-        <?php else: ?>
-            <p><?= $file ?></p>
-        <?php endif; ?>
-    <?php endforeach; ?>
-</details></p>
+<?= $model->getModuleNavigatorHtml() ?>
+<?= $model->getFileNavigatorHtml() ?>
 
 <?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
     <div class="form-group">
