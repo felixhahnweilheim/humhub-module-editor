@@ -90,7 +90,7 @@ class FileEditor extends \yii\base\Model
     
     public function getModuleNavigatorHtml(): string
     {
-        $result = '<details class"module-editor-nav"><summary><b>' . Yii::t('ModuleEditorModule.admin', 'Module:') . ' </b>' . $this->moduleId . '</summary>';
+        $result = '<details class="module-editor-nav"><summary><b>' . Yii::t('ModuleEditorModule.admin', 'Module:') . ' </b>' . $this->moduleId . '</summary>';
         
         $modules = Yii::$app->moduleManager->getModules();
         foreach ($modules as $id => $module) {
@@ -103,7 +103,7 @@ class FileEditor extends \yii\base\Model
     
     public function getFileNavigatorHtml(): string
     {
-        $result = '<details class"module-editor-nav"><summary><b>' . Yii::t('ModuleEditorModule.admin', 'File Navigator') . '</b></summary>';
+        $result = '<details class="module-editor-nav"><summary><b>' . Yii::t('ModuleEditorModule.admin', 'File Navigator') . '</b></summary>';
     
         $result .= self::dirToHtml($this->getBasePath());
         
