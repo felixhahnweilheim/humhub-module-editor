@@ -14,7 +14,7 @@ NavigatorAssets::register($this);
     <?= $model->getFileNavigatorHtml() ?>
 </div>
 <?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
-    <div class="form-group" style="width: calc(100% - 630px);">
+    <div class="form-group filename">
         <?= $form->field($model, 'file'); ?>
     </div>
     <div class="form-group required"><label><?= Yii::t('ModuleEditorModule.admin', 'Content') ?></label></div>

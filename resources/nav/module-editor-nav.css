@@ -1,3 +1,17 @@
+.form-group.filename {
+    margin-top: 90px;
+}
+@media screen and (min-width:600px){
+    .form-group.filename {
+        margin-top: 40px;
+    }
+}
+@media screen and (min-width:900px){
+    .form-group.filename {
+        width: calc(100% - 630px);
+        margin-top:0px;
+    }
+}
 .module-editor-nav-container {
     position: absolute;
     right: 0px;
@@ -10,7 +24,7 @@
     background: var(--background-color-highlight-soft);
     border-radius: 7px;
     width: 300px;
-    margin: 0px 10px 20px;
+    margin: 0px 10px 10px;
 }
 .module-editor-nav details {
     padding: 0 0 0 5px;
