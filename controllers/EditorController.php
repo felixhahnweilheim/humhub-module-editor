@@ -10,6 +10,12 @@ class EditorController extends \humhub\modules\admin\components\Controller
 {
     public $subLayout = '@module-editor/views/layouts/admin';
     
+    public function init()
+    {
+        parent::init();
+        $this->setPageTitle(Yii::t('ModuleEditorModule.admin', 'Module Editor'));
+    }
+    
     public function actionIndex(string $moduleId = 'module-editor', string $file = '/Module.php')
     {
         $form = new FileEditor($moduleId, $file);
