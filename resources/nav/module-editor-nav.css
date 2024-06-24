@@ -1,12 +1,12 @@
 .form-group.filename {
     margin-top: 90px;
 }
-@media screen and (min-width:600px){
+@media screen and (min-width:644px){
     .form-group.filename {
         margin-top: 40px;
     }
 }
-@media screen and (min-width:900px){
+@media screen and (min-width:992px){
     .form-group.filename {
         width: calc(100% - 630px);
         margin-top:0px;
