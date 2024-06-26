@@ -12,11 +12,13 @@ class ToolsController extends \humhub\modules\admin\components\Controller
     public function init()
     {
         parent::init();
-        $this->setPageTitle(Yii::t('ModuleEditorModule.admin', 'Module Editor'));
+        $this->setPageTitle(Yii::t('ModuleEditorModule.admin', 'Translations'));
+        $this->appendPageTitle(Yii::t('ModuleEditorModule.admin', 'Module Editor'));
     }
     
     public function actionMessages(): string
     {
+        $this->pageTitle = 'test';
         $form = new ModuleMessages();
 
         if ($form->load(Yii::$app->request->post())) {

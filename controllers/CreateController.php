@@ -12,7 +12,8 @@ class CreateController extends \humhub\modules\admin\components\Controller
     public function init()
     {
         parent::init();
-        $this->setPageTitle(Yii::t('ModuleEditorModule.admin', 'Module Editor'));
+        $this->setPageTitle(Yii::t('ModuleEditorModule.admin', 'New Module'));
+        $this->appendPageTitle(Yii::t('ModuleEditorModule.admin', 'Module Editor'));
     }
     
     public function actionIndex(): string
