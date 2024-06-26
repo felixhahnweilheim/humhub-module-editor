@@ -10,7 +10,7 @@ class AceAssets extends \humhub\components\assets\AssetBundle
     public $sourcePath = '@module-editor/resources/ace';
 
     public $publishOptions = [
-        'forceCopy' => true
+        'forceCopy' => false
     ];
 
     public $js = [
@@ -44,13 +44,13 @@ class AceAssets extends \humhub\components\assets\AssetBundle
                     return "Changes you made might not be saved.";
                 };
                 window.addEventListener("beforeunload", unloadListener);
+                $(document).on("pjax:beforeSend", function (evt, xhr, options) {
+                    return confirm("Changes you made might not be saved.");
+                });
             });
             $( "#file-editor-form" ).on( "submit", function( event ) {
                 window.removeEventListener("beforeunload", unloadListener);
                 window.onbeforeunload = null;
-            });
-            $(document).on("pjax:beforeSend", function (evt, xhr, options) {
-                return confirm("Changes you made might not be saved.");
             });',
             View::POS_END
         );
