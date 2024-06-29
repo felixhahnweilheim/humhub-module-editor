@@ -35,18 +35,31 @@ class AceAssets extends \humhub\components\assets\AssetBundle
             editor.session.setTabSize(4);
             editor.session.setUseSoftTabs(true);
             editor.setOption("showInvisibles", true);
+            
+            var userConfirmed = false;
             var unloadListener = function() {
                 return "Changes you made might not be saved.";
             };
+            var pjaxBeforeListener = function(evt, xhr, options) {
+                if (userConfirmed === false) {
+                    userConfirmed = confirm("Changes you made might not be saved.");
+                }
+                return userConfirmed;
+            };
+            var pjaxAfterListener = function(evt, xhr, options) {
+                 $(document).off("pjax:beforeSend", "**");
+            };
+            var isFirstChange = 1;
+            
+            $(document).on("pjax:success", pjaxAfterListener);
             editor.session.on("change", function(delta){
                 document.forms["file-editor-form"]["FileEditor[content]"].value = editor.getValue();
-                window.onbeforeunload = function() {
-                    return "Changes you made might not be saved.";
-                };
-                window.addEventListener("beforeunload", unloadListener);
-                $(document).on("pjax:beforeSend", function (evt, xhr, options) {
-                    return confirm("Changes you made might not be saved.");
-                });
+                if (isFirstChange === 1) {
+                    window.onbeforeunload = unloadListener;
+                    window.addEventListener("beforeunload", unloadListener);
+                    $(document).on("pjax:beforeSend", "**", pjaxBeforeListener);
+                    isFirstChange = 0;
+                }
             });
             $( "#file-editor-form" ).on( "submit", function( event ) {
                 window.removeEventListener("beforeunload", unloadListener);
