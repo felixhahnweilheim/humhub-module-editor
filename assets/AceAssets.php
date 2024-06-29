@@ -48,6 +48,8 @@ class AceAssets extends \humhub\components\assets\AssetBundle
             };
             var pjaxAfterListener = function(evt, xhr, options) {
                  $(document).off("pjax:beforeSend", "**");
+                 window.removeEventListener("beforeunload", unloadListener);
+                 window.onbeforeunload = null;
             };
             var isFirstChange = 1;
             
