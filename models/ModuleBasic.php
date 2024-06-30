@@ -99,9 +99,9 @@ class ModuleBasic extends \yii\base\Model
     public function getModulePaths(): array
     {
         $paths = Yii::$app->params['moduleAutoloadPaths'];
-		foreach ($paths as $path) {
-			$result[$path] = $path;
-		}
-		return $result;
+        foreach ($paths as $path) {
+            $result[$path] = $path . ' => ' . Yii::getAlias($path);
+        }
+        return $result;
     }
 }
