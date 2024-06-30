@@ -21,7 +21,6 @@ class ModuleMessages extends \yii\base\Model
     {
         $module = Yii::$app->getModule($this->$attribute);
         if (!$module instanceof Module) {
-			\Yii::error('DEB F : ' . $this->$attribute);
             $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'Module not found.'));
         }
     }
@@ -57,5 +56,15 @@ class ModuleMessages extends \yii\base\Model
             return true;
         }
         return false;
+    }
+    
+    public function getModules(): array
+    {
+        $result =[];
+        $modules = Yii::$app->moduleManager->getModules();
+        foreach ($modules as $id => $module) {
+            $result[$id] = $id . '-' . $module->getName();
+        }
+        return $result;
     }
 }
