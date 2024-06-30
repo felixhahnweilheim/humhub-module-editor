@@ -18,7 +18,7 @@ use humhub\libs\Html;
         </div>
     <?php endif; ?>
     <div class="form-group">
-        <?= $form->field($model, 'moduleId'); ?>
+        <?= $form->field($model, 'moduleId')->dropdownList($model->getModules()); ?>
     </div>
     <div class="form-group">
         <?= Html::submitButton(Yii::t('ModuleEditorModule.admin', 'Create/Update'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>
