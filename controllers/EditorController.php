@@ -24,8 +24,8 @@ class EditorController extends \humhub\modules\admin\components\Controller
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
             $this->view->saved();
             
-            // Redirect if file has been renamed
-            if ($form->file !== $form->oldFile) {
+            // Redirect if file has been renamed or created
+            if ($form->file !== $form->oldFile || $form->oldFile === null) {
                 return $this->redirect(Url::getEditorUrl($form->moduleId, $form->file));
             }
         }
