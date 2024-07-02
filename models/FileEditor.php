@@ -57,6 +57,7 @@ class FileEditor extends \yii\base\Model
             // Only allow known file types for creating
             if ($this->oldFile === null) {
                 $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'This file type is not supported.'));
+                return;
             }
             // Allow other plain text files for editing
             if (mime_content_type($this->getFullPath()) !== 'text/plain') {
