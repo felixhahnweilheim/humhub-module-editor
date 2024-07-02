@@ -28,32 +28,40 @@ class FileEditor extends \yii\base\Model
     public $content;
     public $extension;
 
-    public function __construct(string $moduleId, string $file)
+    public function __construct(string $moduleId, ?string $file)
     {
         $this->moduleId = $moduleId;
         $this->extension = pathinfo($file, PATHINFO_EXTENSION);
         $this->file = $file;
         $this->oldFile = $this->file;
-        $this->content = file_get_contents($this->getFullPath());
-        if (!$this->validate()) {
-            throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'This file type is not supported.'));
+        if ($this->file !== null) {
+            $this->content = file_get_contents($this->getFullPath());
+            if (!$this->validate()) {
+                throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'This file type is not supported.'));
+            }
         }
     }
 
     public function rules(): array
     {
         return [
-            [['moduleId', 'file', 'content'], 'required'],
-            [['file'], 'knownFileType']
+            [['moduleId', 'file'], 'required'],
+            [['file'], 'checkFile']
         ];
     }
     
-    public function knownFileType(string $attribute, $params, $validator)
+    public function checkFile(string $attribute, $params, $validator)
     {
+        // Check mime type
         if (!isset(self::ACE_MODES[$this->extension])) {
             if (mime_content_type($this->getFullPath()) !== 'text/plain') {
                 $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'This file type is not supported.'));
             }
+        }
+        
+        // File creating: Do not ovewrite an existing file
+        if ($this->oldFile === null && file_exists(self::getFullPath())) {
+            $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'The file already exists.'));
         }
     }
     
@@ -70,6 +78,12 @@ class FileEditor extends \yii\base\Model
             'file' => Yii::t('ModuleEditorModule.admin', 'including the path relative to the module base directory')
         ];
     }
+	
+	public function beforeValidate(): bool
+	{
+		$this->extension = pathinfo($this->file, PATHINFO_EXTENSION);
+		return true;
+	}
 
     public function save(): bool
     {
@@ -82,7 +96,7 @@ class FileEditor extends \yii\base\Model
         }
         
         // Rename: If File name was changed, delete old file
-        if ($this->file !== $this->oldFile) {
+        if ($this->file !== $this->oldFile && $this->oldFile !== null) {
             unlink($this->getFullPathOld());
         }
         return true;
