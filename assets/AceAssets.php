@@ -3,6 +3,7 @@
 namespace humhub\modules\moduleEditor\assets;
 
 use humhub\modules\moduleEditor\models\FileEditor;
+use Yii;
 use yii\web\View;
 
 class AceAssets extends \humhub\components\assets\AssetBundle
@@ -27,6 +28,11 @@ class AceAssets extends \humhub\components\assets\AssetBundle
         } else {
             $mode = 'text';
         }
+        $view->registerJSConfig('module_editor', [
+            'text' => [
+                'warning.notsaved' => Yii::t('ModuleEditorModule.admin', 'Changes you made might not be saved.')
+            ]
+        ]);
         $view->registerJS(
             'var editor = ace.edit("editor");
             editor.setTheme("ace/theme/monokai");
@@ -35,14 +41,17 @@ class AceAssets extends \humhub\components\assets\AssetBundle
             editor.session.setTabSize(4);
             editor.session.setUseSoftTabs(true);
             editor.setOption("showInvisibles", true);
+
+            humhub.module("module_editor", function(module, require, $) {});
             
+            var msg = humhub.modules.module_editor.text("warning.notsaved");
             var userConfirmed = false;
             var unloadListener = function() {
-                return "Changes you made might not be saved.";
+                return msg;
             };
             var pjaxBeforeListener = function(evt, xhr, options) {
                 if (userConfirmed === false) {
-                    userConfirmed = confirm("Changes you made might not be saved.");
+                    userConfirmed = confirm(msg);
                 }
                 return userConfirmed;
             };
