@@ -65,7 +65,7 @@ class FileEditor extends \yii\base\Model
             }
         }
         
-        // File creating: Do not ovewrite an existing file
+        // File creating: Do not overwrite an existing file
         if ($this->oldFile === null && file_exists(self::getFullPath())) {
             $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'The file already exists.'));
         }
@@ -97,7 +97,7 @@ class FileEditor extends \yii\base\Model
             return false;
         }
         
-        if (!file_put_contents($this->getFullPath(), $this->content)) {
+        if (file_put_contents($this->getFullPath(), $this->content) === false) {
             return false;
         }
         
