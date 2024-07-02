@@ -110,7 +110,9 @@ class FileEditor extends \yii\base\Model
     
     public function getModuleNavigatorHtml(): string
     {
-        $result = '<details class="module-editor-nav"><summary><b>' . Yii::t('ModuleEditorModule.admin', 'Module:') . ' </b>' . $this->moduleId . '</summary>';
+        $result = '<details class="module-editor-nav"><summary><b>' . Yii::t('ModuleEditorModule.admin', 'Module:') . ' </b>' . $this->moduleId . '
+<a class="btn btn-primary btn-sm pull-right" href="' . Url::getCreateUrl($this->moduleId, null) . '">+</a>
+</summary>';
         
         $modules = Yii::$app->moduleManager->getModules();
         foreach ($modules as $id => $module) {
@@ -123,7 +125,9 @@ class FileEditor extends \yii\base\Model
     
     public function getFileNavigatorHtml(): string
     {
-        $result = '<details class="module-editor-nav"><summary><b>' . Yii::t('ModuleEditorModule.admin', 'File Navigator') . '</b></summary>';
+        $result = '<details class="module-editor-nav"><summary><b>' . Yii::t('ModuleEditorModule.admin', 'File Navigator') . '</b>
+<a class="btn btn-primary btn-sm pull-right" href="' . Url::getEditorUrl($this->moduleId, null) . '">+</a>
+</summary>';
     
         $result .= self::dirToHtml($this->getBasePath());
         
