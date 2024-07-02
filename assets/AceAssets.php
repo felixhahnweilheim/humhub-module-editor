@@ -16,6 +16,7 @@ class AceAssets extends \humhub\components\assets\AssetBundle
 
     public $js = [
         'ace.js',
+        'humhub-module-editor.js'
     ];
     
     public $defer = false;
@@ -29,55 +30,11 @@ class AceAssets extends \humhub\components\assets\AssetBundle
             $mode = 'text';
         }
         $view->registerJSConfig('module_editor', [
+            'mode' => $mode,
             'text' => [
                 'warning.notsaved' => Yii::t('ModuleEditorModule.admin', 'Changes you made might not be saved.')
             ]
         ]);
-        $view->registerJS(
-            'var editor = ace.edit("editor");
-            editor.setTheme("ace/theme/monokai");
-            editor.session.setMode("ace/mode/' . $mode . '");
-            editor.session.setUseWrapMode(true);
-            editor.session.setTabSize(4);
-            editor.session.setUseSoftTabs(true);
-            editor.setOption("showInvisibles", true);
-
-            humhub.module("module_editor", function(module, require, $) {});
-            
-            var msg = humhub.modules.module_editor.text("warning.notsaved");
-            var userConfirmed = false;
-            var unloadListener = function() {
-                return msg;
-            };
-            var pjaxBeforeListener = function(evt, xhr, options) {
-                if (userConfirmed === false) {
-                    userConfirmed = confirm(msg);
-                }
-                return userConfirmed;
-            };
-            var pjaxAfterListener = function(evt, xhr, options) {
-                 $(document).off("pjax:beforeSend", "**");
-                 window.removeEventListener("beforeunload", unloadListener);
-                 window.onbeforeunload = null;
-            };
-            var isFirstChange = 1;
-            
-            $(document).on("pjax:success", pjaxAfterListener);
-            editor.session.on("change", function(delta){
-                document.forms["file-editor-form"]["FileEditor[content]"].value = editor.getValue();
-                if (isFirstChange === 1) {
-                    window.onbeforeunload = unloadListener;
-                    window.addEventListener("beforeunload", unloadListener);
-                    $(document).on("pjax:beforeSend", "**", pjaxBeforeListener);
-                    isFirstChange = 0;
-                }
-            });
-            $( "#file-editor-form" ).on( "submit", function( event ) {
-                window.removeEventListener("beforeunload", unloadListener);
-                window.onbeforeunload = null;
-            });',
-            View::POS_END
-        );
         $view->registerCSS(
             '#editor {
                 position: absolute;
