@@ -46,6 +46,7 @@ class FileEditor extends \yii\base\Model
     {
         return [
             [['moduleId', 'file'], 'required'],
+            [['content'], 'safe'],
             [['file'], 'checkFile']
         ];
     }
