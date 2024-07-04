@@ -185,4 +185,9 @@ class FileEditor extends \yii\base\Model
     {
         return Yii::getAlias('@' . $this->moduleId . $this->oldFile);
     }
+    
+    public function getDeleteUrl(): string
+    {
+        return Url::getDeleteUrl($this->moduleId, $this->file);
+    }
 }

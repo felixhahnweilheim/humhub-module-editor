@@ -2,6 +2,7 @@
 
 use humhub\modules\moduleEditor\assets\AceAssets;
 use humhub\modules\moduleEditor\assets\NavigatorAssets;
+use humhub\modules\moduleEditor\helpers\Url;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\libs\Html;
 use \yii\web\View;
@@ -26,6 +27,7 @@ NavigatorAssets::register($this);
         <div id="editor"><?= htmlspecialchars($model->content) ?></div>
     </div>
     <div class="form-group">
-        <?= Html::submitButton(\Yii::t('base', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>
+        <?= Html::submitButton(Yii::t('ModuleEditorModule.admin', 'Delete'), ['class' =>'btn btn-danger', 'href' => '#', 'id' => 'delete-button', 'data-action-click' => 'ui.modal.load', 'data-action-click-url' => $model->getDeleteUrl()]) ?>
+        <?= Html::saveButton() ?>
     </div>
 <?php ActiveForm::end(); ?>

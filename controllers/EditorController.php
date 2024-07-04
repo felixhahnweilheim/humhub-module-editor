@@ -3,6 +3,7 @@
 namespace humhub\modules\moduleEditor\controllers;
 
 use humhub\modules\moduleEditor\models\FileEditor;
+use humhub\modules\moduleEditor\models\FileDelete;
 use humhub\modules\moduleEditor\helpers\Url;
 use Yii;
 
@@ -31,5 +32,17 @@ class EditorController extends \humhub\modules\admin\components\Controller
         }
         
         return $this->render('index', ['model' => $form]);
+    }
+    
+    public function actionDeleteModal(string $moduleId, string $file)
+    {
+        $form = new FileDelete($moduleId, $file);
+        
+        if ($form->load(Yii::$app->request->post()) && $form->save()) {
+            $this->view->saved();
+            return $this->redirect(Url::getEditorUrl($form->moduleId));
+        }
+        
+        return $this->renderAjax('delete-modal', ['model' => $form]);
     }
 }
