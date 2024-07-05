@@ -27,7 +27,7 @@ NavigatorAssets::register($this);
         <div id="editor"><?= htmlspecialchars($model->content) ?></div>
     </div>
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('ModuleEditorModule.admin', 'Delete'), ['class' =>'btn btn-danger', 'href' => '#', 'id' => 'delete-button', 'data-action-click' => 'ui.modal.load', 'data-action-click-url' => $model->getDeleteUrl()]) ?>
+        <?= $model->oldFile ? Html::submitButton(Yii::t('ModuleEditorModule.admin', 'Delete'), ['class' =>'btn btn-danger', 'href' => '#', 'id' => 'delete-button', 'data-action-click' => 'ui.modal.load', 'data-action-click-url' => $model->getDeleteUrl()]) : '' ?>
         <?= Html::saveButton() ?>
     </div>
 <?php ActiveForm::end(); ?>
