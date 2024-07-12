@@ -23,3 +23,6 @@ Just a little time saver for the very beginning of a module.
 
 ## Create/Update translation files
 Extract module messages for a module
+
+## Download Module Files
+Simply download the files of a module as ZIP archive.
