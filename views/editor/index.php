@@ -5,7 +5,8 @@ use humhub\modules\moduleEditor\assets\NavigatorAssets;
 use humhub\modules\moduleEditor\helpers\Url;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\libs\Html;
-use \yii\web\View;
+use humhub\modules\ui\icon\widgets\Icon;
+use yii\web\View;
 
 AceAssets::addAssetsFor($this, $model->extension);
 NavigatorAssets::register($this);
@@ -27,7 +28,7 @@ NavigatorAssets::register($this);
         <div id="editor"><?= htmlspecialchars($model->content) ?></div>
     </div>
     <div class="form-group">
-        <?= $model->oldFile ? Html::submitButton(Yii::t('ModuleEditorModule.admin', 'Delete'), ['class' =>'btn btn-danger', 'href' => '#', 'id' => 'delete-button', 'data-action-click' => 'ui.modal.load', 'data-action-click-url' => $model->getDeleteUrl()]) : '' ?>
-        <?= Html::saveButton() ?>
+        <?= $model->oldFile ? Html::a(Icon::get('trash-o'), '#', ['class' => 'btn pull-right', 'style' => 'color:var(--danger);;font-size:1.5em', 'href' => '#', 'id' => 'delete-button', 'data-action-click' => 'ui.modal.load', 'data-action-click-url' => $model->getDeleteUrl()]) : '' ?>
+        <?= Html::saveButton(Icon::get('floppy-o') . Yii::t('base', 'Save')) ?>
     </div>
 <?php ActiveForm::end(); ?>

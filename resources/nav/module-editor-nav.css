@@ -35,7 +35,6 @@ summary {
 }
 details.module-editor-nav summary {
     display: list-item;
-    border-bottom: 1px solid var(--default);
 }
 .module-editor-nav details summary {
     margin: 10px 0;
