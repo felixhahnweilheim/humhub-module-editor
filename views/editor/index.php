@@ -3,6 +3,9 @@
 use humhub\modules\moduleEditor\assets\AceAssets;
 use humhub\modules\moduleEditor\assets\NavigatorAssets;
 use humhub\modules\moduleEditor\helpers\Url;
+use humhub\modules\moduleEditor\widgets\ModuleNavigator;
+use humhub\modules\moduleEditor\widgets\FileNavigator;
+use humhub\modules\moduleEditor\widgets\DeleteButton;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\libs\Html;
 use humhub\modules\ui\icon\widgets\Icon;
@@ -12,8 +15,8 @@ AceAssets::addAssetsFor($this, $model->extension);
 NavigatorAssets::register($this);
 ?>
 <div class="module-editor-nav-container">
-    <?= $model->getModuleNavigatorHtml() ?>
-    <?= $model->getFileNavigatorHtml() ?>
+    <?= ModuleNavigator::widget(['moduleId' => $model->moduleId]); ?>
+    <?= FileNavigator::widget(['moduleId' => $model->moduleId]) ?>
 </div>
 <?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
     <h2 style="margin-top:0">
@@ -28,7 +31,7 @@ NavigatorAssets::register($this);
         <div id="editor"><?= htmlspecialchars($model->content) ?></div>
     </div>
     <div class="form-group">
-        <?= $model->oldFile ? Html::a(Icon::get('trash-o'), '#', ['class' => 'btn pull-right', 'style' => 'color:var(--danger);;font-size:1.5em', 'href' => '#', 'id' => 'delete-button', 'data-action-click' => 'ui.modal.load', 'data-action-click-url' => $model->getDeleteUrl()]) : '' ?>
+        <?= DeleteButton::widget(['model' => $model]) ?>
         <?= Html::saveButton(Icon::get('floppy-o') . Yii::t('base', 'Save')) ?>
     </div>
 <?php ActiveForm::end(); ?>
