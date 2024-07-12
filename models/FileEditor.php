@@ -98,6 +98,12 @@ class FileEditor extends \yii\base\Model
             return false;
         }
         
+        // Create directory if it does not exist yet
+        if (!is_dir(dirname($this->getFullPath()))) {
+            mkdir(dirname($this->getFullPath()));
+        }
+        
+        // Write contents / Create file
         if (file_put_contents($this->getFullPath(), $this->content) === false) {
             return false;
         }

@@ -16,7 +16,7 @@ The following file types are supported:
 - gitignore, yaml
 - plain text files
 
-**You can also create, rename and delete files.** New directories can not be created yet.
+**You can also create, rename and delete files.**
 
 ## Create a module sceleton
 Just a little time saver for the very beginning of a module.

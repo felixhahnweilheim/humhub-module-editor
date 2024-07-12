@@ -34,10 +34,10 @@ class AdminMenu extends TabMenu
         ]));
         
         $this->addEntry(new MenuLink([
-            'label' => Yii::t('ModuleEditorModule.admin', 'Translations'),
-            'url' => Url::getToolsUrl('messages'),
+            'label' => Yii::t('ModuleEditorModule.admin', 'Tools'),
+            'url' => Url::getToolsUrl(),
             'sortOrder' => 300,
-            'isActive' => MenuLink::isActiveState('module-editor', 'tools', 'messages'),
+            'isActive' => MenuLink::isActiveState('module-editor', 'tools'),
             'isVisible' => true
         ]));
 
