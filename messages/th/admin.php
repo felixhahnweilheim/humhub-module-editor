@@ -29,11 +29,11 @@ return [
     'New Module' => '',
     'Permanently delete this file?' => '',
     'Response' => '',
+    'Select module ...' => '',
     'The file already exists.' => '',
     'This file type is not supported.' => '',
     'Title' => '',
     'Tools' => '',
-    'Translations' => '',
     'including the path relative to the module base directory' => '',
     'unknown module path' => '',
 ];
