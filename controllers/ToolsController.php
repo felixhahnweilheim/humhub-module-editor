@@ -42,7 +42,6 @@ class ToolsController extends \humhub\modules\admin\components\Controller
         $files = FileHelper::findFiles($modulePath);
         
         foreach ($files as $file) {
-            Yii::error("Adding file: " . $file . " to " . $moduleId . substr($file, $pathLength));
             $zip->addFile($file, $moduleId . substr($file, $pathLength));
         }
 
