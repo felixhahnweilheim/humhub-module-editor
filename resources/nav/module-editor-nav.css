@@ -1,12 +1,12 @@
 summary {
 	cursor: pointer;
 }
-.form-group.filename {
-    margin-top: 90px;
+#file-editor-form {
+    padding-top: 100px;
 }
 @media screen and (min-width:644px){
-    .form-group.filename {
-        margin-top: 40px;
+    #file-editor-form {
+        padding-top: 50px;
     }
 }
 @media screen and (min-width:992px){
@@ -31,10 +31,11 @@ summary {
 }
 .module-editor-nav details {
     padding: 0 0 0 5px;
-    margin: 0px 10px 20px;
+    margin: 0px 10px 10px;
 }
 details.module-editor-nav summary {
     display: list-item;
+    line-height: 2;
 }
 .module-editor-nav details summary {
     margin: 10px 0;

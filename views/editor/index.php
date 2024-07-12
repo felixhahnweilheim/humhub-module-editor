@@ -22,13 +22,12 @@ NavigatorAssets::register($this);
     <h2 style="margin-top:0">
         <?= $model->oldFile ? Yii::t('ModuleEditorModule.admin', 'Edit File') : Yii::t('ModuleEditorModule.admin', 'New File')?>
     </h2>
-    <div class="form-group filename">
-        <?= $form->field($model, 'file'); ?>
-    </div>
-    <div class="form-group required"><label><?= Yii::t('ModuleEditorModule.admin', 'Content') ?></label></div>
-    <div class="form-group" style="position:relative;width:100%;height:500px;">
-        <?= $form->field($model, 'content')->textarea(); ?>
-        <div id="editor"><?= htmlspecialchars($model->content) ?></div>
+    <?= $form->field($model, 'file'); ?>
+    <div class="form-group required"><label><?= Yii::t('ModuleEditorModule.admin', 'Content') ?></label>
+        <div style="position:relative;width:100%;height:500px;">
+            <?= $form->field($model, 'content')->textarea(); ?>
+            <div id="editor"><?= htmlspecialchars($model->content) ?></div>
+        </div>
     </div>
     <div class="form-group">
         <?= DeleteButton::widget(['model' => $model]) ?>
