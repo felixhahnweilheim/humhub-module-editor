@@ -42,7 +42,15 @@ humhub.module("module_editor", function(module, require, $)
             window.removeEventListener("beforeunload", unloadListener);
             window.onbeforeunload = null;
         });
-    
+        
+        // Save on Ctrl+S
+        $(document).bind("keyup keydown", function(e){
+            if(e.ctrlKey && e.which == 83){
+                $("#file-editor-form button[type=submit]").click();
+                e.preventDefault();
+            }
+        });
+        
         if(isPjax) {
             // Remove event handlers
             $(document).off("pjax:beforeSend", "**");

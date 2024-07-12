@@ -33,5 +33,6 @@ NavigatorAssets::register($this);
     <div class="form-group">
         <?= DeleteButton::widget(['model' => $model]) ?>
         <?= Html::saveButton(Icon::get('floppy-o') . Yii::t('base', 'Save')) ?>
+        <small>&nbsp;Ctrl + S</small>
     </div>
 <?php ActiveForm::end(); ?>
