@@ -10,9 +10,8 @@ summary {
     }
 }
 @media screen and (min-width:992px){
-    .form-group.filename {
-        width: calc(100% - 630px);
-        margin-top:0px;
+    #file-editor-form {
+        padding-top: 0px;
     }
 }
 .module-editor-nav-container {
