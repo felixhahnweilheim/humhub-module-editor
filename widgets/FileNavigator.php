@@ -4,6 +4,7 @@ namespace humhub\modules\moduleEditor\widgets;
 
 use humhub\modules\moduleEditor\helpers\Url;
 use humhub\components\Widget;
+use Yii;
 
 /**
  * File Navigation for File Editor
