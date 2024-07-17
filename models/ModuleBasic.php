@@ -100,7 +100,7 @@ class ModuleBasic extends \yii\base\Model
     {
         $paths = Yii::$app->params['moduleAutoloadPaths'];
         foreach ($paths as $path) {
-            $result[$path] = $path . ' => ' . Yii::getAlias($path);
+            $result[$path] = $path;
         }
         return $result;
     }
