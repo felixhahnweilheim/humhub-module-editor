@@ -8,6 +8,8 @@ use yii\helpers\FileHelper;
 
 class ToolsController extends \humhub\modules\admin\components\Controller
 {
+    private const ZIP_DIR = '@runtime/module-editor';
+    
     public $subLayout = '@module-editor/views/layouts/admin';
     
     public function init()
@@ -33,7 +35,12 @@ class ToolsController extends \humhub\modules\admin\components\Controller
         $modulePath =  Yii::getAlias('@' . $moduleId);
         $pathLength = strlen($modulePath);
         $zip = new \ZipArchive();
-        $tempFile = Yii::getAlias("@runtime") . "/" . $moduleId . ".zip";
+        $zipDir = Yii::getAlias(self::ZIP_DIR);
+        $tempFile = $zipDir . "/" . $moduleId . ".zip";
+        
+        if (!is_dir($zipDir)) {
+            mkdir($zipDir);
+        }
         
         if ($zip->open($tempFile, \ZipArchive::CREATE | \ZipArchive::OVERWRITE)!==TRUE) {
             throw new \Exception("cannot open <$tempFile>\n");
