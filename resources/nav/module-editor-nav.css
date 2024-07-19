@@ -30,11 +30,14 @@ summary {
 }
 .module-editor-nav details {
     padding: 0 0 0 5px;
-    margin: 0px 10px 10px;
+    margin: 0px 0px 10px;
 }
 details.module-editor-nav summary {
     display: list-item;
     line-height: 2;
+}
+details.module-editor-nav > summary {
+    padding: 10px;
 }
 .module-editor-nav details summary {
     margin: 10px 0;
@@ -42,4 +45,13 @@ details.module-editor-nav summary {
 details.module-editor-nav p {
     padding-left: 10px;
     margin: 10px 0;
+}
+.module-editor-nav-content {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    box-shadow: inset -5px 5px 20px -4px var(--default);
+    padding: 0 0 0 10px;
+}
+details.module-editor-nav {
+    padding: 0;
 }

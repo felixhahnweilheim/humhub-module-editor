@@ -13,4 +13,8 @@ class NavigatorAssets extends \humhub\components\assets\AssetBundle
     public $css = [
         'module-editor-nav.css',
     ];
+    
+    public $js = [
+        'module-editor-nav.js'
+    ];
 }

@@ -28,7 +28,7 @@ class FileNavigator extends Widget
     
     private function dirToHtml(string $dir): string
     {
-        $result = '';
+        $result = '<div class="module-editor-nav-content">';
         
         // relative to module path
         $relDir = str_replace($this->getBasePath(), '', $dir);
@@ -48,14 +48,15 @@ class FileNavigator extends Widget
                 }
             }
         }
-        foreach ($files as $file) {
-            $result .= '<p><a href="' . Url::getEditorUrl($this->moduleId, $relDir . DIRECTORY_SEPARATOR . $file) . '">' . $file  . '</a></p>';
-        }
         foreach ($subdirs as $subdir) {
             $result .= "<details><summary>$subdir</summary>";
             $result .= self::dirToHtml($dir . DIRECTORY_SEPARATOR . $subdir);
             $result .= "</details>";
         }
+        foreach ($files as $file) {
+            $result .= '<p><a href="' . Url::getEditorUrl($this->moduleId, $relDir . DIRECTORY_SEPARATOR . $file) . '">' . $file  . '</a></p>';
+        }
+        $result .= "</div>";
         
         return $result;
     }
