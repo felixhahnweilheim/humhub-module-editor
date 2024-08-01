@@ -15,7 +15,7 @@ class AceAssets extends \humhub\components\assets\AssetBundle
     ];
 
     public $js = [
-        'ace.js',
+        'src-min/ace.js',
         'humhub-module-editor.js'
     ];
     
