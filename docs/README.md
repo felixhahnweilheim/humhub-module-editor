@@ -35,10 +35,10 @@ return [
         'web' => [
             'security' =>  [
                 "csp" => [
-					"worker-src" => [
+                    "worker-src" => [
                         "self" => true,
-						"blob" => true
-					]
+                        "blob" => true
+                    ]
                 ]
             ]
         ]
