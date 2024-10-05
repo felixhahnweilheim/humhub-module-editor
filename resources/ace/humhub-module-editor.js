@@ -112,7 +112,7 @@ humhub.module("module_editor", function(module, require, $)
         for (var key in annots){
             if (annots.hasOwnProperty(key) && annots[key].type == 'error') {
                 submitButton.attr('disabled', '');
-                buttonHelpText.html(module.text("solveErrors"));
+                buttonHelpText.html(module.text("warning.solveErrors"));
                     break;
             }
         }
