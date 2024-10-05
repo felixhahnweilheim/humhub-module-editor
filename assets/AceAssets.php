@@ -32,8 +32,8 @@ class AceAssets extends \humhub\components\assets\AssetBundle
         $view->registerJSConfig('module_editor', [
             'mode' => $mode,
             'text' => [
-                'warning.notsaved' => Yii::t('ModuleEditorModule.admin', 'Changes you made might not be saved.'),
-                'solveErrors' => Yii::t('ModuleEditorModule.admin', 'Solve syntax errors before saving the file!')
+                'warning.notSaved' => Yii::t('ModuleEditorModule.admin', 'Changes you made might not be saved.'),
+                'warning.solveErrors' => Yii::t('ModuleEditorModule.admin', 'Solve syntax errors before saving the file!')
             ]
         ]);
         $view->registerCSS(
