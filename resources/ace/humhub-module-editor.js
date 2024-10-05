@@ -10,21 +10,18 @@ humhub.module("module_editor", function(module, require, $)
     var submitButton;
     var editor;
     
-    var msg = module.text("warning.notsaved");
+    var msg = module.text("warning.notSaved");
     var buttonHelpText = $('.form-group .button-help-text');
     var buttonHelpTextContent = buttonHelpText.html();
 
     var init = function(isPjax) {
-        
-        
         window.onerror = function(msg, url, linenumber) {
-    //alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
-    return true;
-}
+            return true;
+        }
         
         mode = module.config.mode;
         userConfirmed = false;
-        isFirstChange = 1;
+        isFirstChange = true;
         submitButton =  $("#file-editor-form button[type=submit]");
         editor = ace.edit("editor");
         editor.setTheme(theme);
@@ -40,11 +37,11 @@ humhub.module("module_editor", function(module, require, $)
             document.forms["file-editor-form"]["FileEditor[content]"].value = editor.getValue();
             
             // Add event listeners on first change
-            if (isFirstChange === 1) {
+            if (isFirstChange) {
                 window.onbeforeunload = unloadListener;
                 window.addEventListener("beforeunload", unloadListener);
                 $(document).on("pjax:beforeSend", "**", pjaxBeforeListener);
-                isFirstChange = 0;
+                isFirstChange = false;
             }
         });
         
@@ -65,29 +62,27 @@ humhub.module("module_editor", function(module, require, $)
         var buildDom = require("ace/lib/dom").buildDom;
         var refs = {};
         var updateToolbar =function() {
-        refs.undoButton.disabled = !editor.session.getUndoManager().hasUndo();
-        refs.redoButton.disabled = !editor.session.getUndoManager().hasRedo();
+            refs.undoButton.disabled = !editor.session.getUndoManager().hasUndo();
+            refs.redoButton.disabled = !editor.session.getUndoManager().hasRedo();
         
-        buildDom(["div", { class: "toolbar" },
-        ["button", {
-            ref: "undoButton",
-            onclick: function() {
-                editor.undo();
-            }
-        }, "undo"],
-        ["button", {  
-            ref: "redoButton",
-            onclick: function() {
-                editor.redo();
-            }
-        }, "redo"],
-    ], document.body, refs);
-    document.body.appendChild(editor.container);
-    };
-    //editor.on("input", updateToolbar);
-    
-    
-        
+            buildDom(["div", { class: "toolbar" },
+              ["button", {
+                ref: "undoButton",
+                onclick: function() {
+                    editor.undo();
+                }
+              }, "undo"],
+              ["button", {  
+                ref: "redoButton",
+                onclick: function() {
+                    editor.redo();
+                }
+              }, "redo"],
+            ], document.body, refs);
+            document.body.appendChild(editor.container);
+        };
+        //editor.on("input", updateToolbar);
+
         if(isPjax) {
             // Remove event handlers
             $(document).off("pjax:beforeSend", "**");
