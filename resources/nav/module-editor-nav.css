@@ -1,3 +1,7 @@
+.form-group.field-fileeditor-file {
+    max-width: 500px;
+}
+
 summary {
 	cursor: pointer;
 }
@@ -30,7 +34,7 @@ summary {
 }
 .module-editor-nav details {
     padding: 0 0 0 5px;
-    margin: 0px 0px 10px;
+    margin: 0px 0px 5px;
 }
 details.module-editor-nav summary {
     display: list-item;
@@ -43,8 +47,19 @@ details.module-editor-nav > summary {
     margin: 10px 0;
 }
 details.module-editor-nav p {
-    padding-left: 10px;
+
+
     margin: 10px 0;
+}
+.panel .panel-body details.module-editor-nav p {
+    padding: 5px 0 5px 10px;
+    width: 100%;
+    color: var(--text-color-main);
+    display: inline-block;
+}
+details.module-editor-nav p a:hover {
+
+    background: var(--background3);
 }
 .module-editor-nav-content {
     max-height: calc(100vh - 200px);
@@ -54,4 +69,10 @@ details.module-editor-nav p {
 }
 details.module-editor-nav {
     padding: 0;
+}
+
+.panel .panel-body p.current {
+    background: var(--background-color-highlight);
+    color: var(--text-color-secondary);
+    padding: 5px 0 5px 10px;
 }

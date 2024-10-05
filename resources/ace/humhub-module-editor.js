@@ -1,28 +1,39 @@
 humhub.module("module_editor", function(module, require, $)
 {
     module.initOnPjaxLoad = true;
+    
+    const theme = 'ace/theme/monokai';
+    
+    var mode;
+    var userConfirmed;
+    var isFirstChange;
+    var submitButton;
+    var editor;
+    
+    var msg = module.text("warning.notsaved");
+    var buttonHelpText = $('.form-group .button-help-text');
+    var buttonHelpTextContent = buttonHelpText.html();
 
     var init = function(isPjax) {
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.session.setMode("ace/mode/" + module.config.mode);
+        
+        
+        window.onerror = function(msg, url, linenumber) {
+    //alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+    return true;
+}
+        
+        mode = module.config.mode;
+        userConfirmed = false;
+        isFirstChange = 1;
+        submitButton =  $("#file-editor-form button[type=submit]");
+        editor = ace.edit("editor");
+        editor.setTheme(theme);
+        editor.session.setMode("ace/mode/" + mode);
         editor.session.setUseWrapMode(true);
         editor.session.setTabSize(4);
         editor.session.setUseSoftTabs(true);
         editor.setOption("showInvisibles", true);
-        
-        var msg = module.text("warning.notsaved");
-        var userConfirmed = false;
-        var unloadListener = function() {
-            return msg;
-        };
-        var pjaxBeforeListener = function(evt, xhr, options) {
-            if (userConfirmed === false) {
-                userConfirmed = confirm(msg);
-            }
-            return userConfirmed;
-        };
-        var isFirstChange = 1;
+        editor.session.on("changeAnnotation", onAnnotations);
         
         editor.session.on("change", function(delta){
             // Sync contents of editor with form
@@ -51,13 +62,67 @@ humhub.module("module_editor", function(module, require, $)
             }
         });
         
+        var buildDom = require("ace/lib/dom").buildDom;
+        var refs = {};
+        var updateToolbar =function() {
+        refs.undoButton.disabled = !editor.session.getUndoManager().hasUndo();
+        refs.redoButton.disabled = !editor.session.getUndoManager().hasRedo();
+        
+        buildDom(["div", { class: "toolbar" },
+        ["button", {
+            ref: "undoButton",
+            onclick: function() {
+                editor.undo();
+            }
+        }, "undo"],
+        ["button", {  
+            ref: "redoButton",
+            onclick: function() {
+                editor.redo();
+            }
+        }, "redo"],
+    ], document.body, refs);
+    document.body.appendChild(editor.container);
+    };
+    //editor.on("input", updateToolbar);
+    
+    
+        
         if(isPjax) {
             // Remove event handlers
             $(document).off("pjax:beforeSend", "**");
             window.removeEventListener("beforeunload", unloadListener);
             window.onbeforeunload = null;
         }
-    }
+    };
+    
+    var unloadListener = function() {
+        return msg;
+    };
+    
+    var pjaxBeforeListener = function(evt, xhr, options) {
+        if (userConfirmed === false) {
+            userConfirmed = confirm(msg);
+        }
+        return userConfirmed;
+    };
+    
+    var onAnnotations = function() {
+        if (mode !== 'php') {
+            return;
+        }
+        var annots = editor.session.getAnnotations();
+        submitButton.attr('disabled', null);
+        buttonHelpText.html(buttonHelpTextContent);
+        for (var key in annots){
+            if (annots.hasOwnProperty(key) && annots[key].type == 'error') {
+                submitButton.attr('disabled', '');
+                buttonHelpText.html(module.text("solveErrors"));
+                    break;
+            }
+        }
+    };
+    
     module.export({
         init: init
     });

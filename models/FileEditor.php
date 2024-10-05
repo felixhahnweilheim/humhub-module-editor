@@ -72,17 +72,10 @@ class FileEditor extends \yii\base\Model
         }
     }
     
-    public function attributeLabels(): array
-    {
-        return [
-            'file' => Yii::t('ModuleEditorModule.admin', 'File')
-        ];
-    }
-    
     public function attributeHints(): array
     {
         return [
-            'file' => Yii::t('ModuleEditorModule.admin', 'including the path relative to the module base directory')
+            'file' => Yii::t('ModuleEditorModule.admin', 'File name & path relative to the module directory')
         ];
     }
 	

@@ -11,7 +11,8 @@ use Yii;
  */
 class FileNavigator extends Widget
 {
-    public $moduleId;
+    public string $moduleId;
+    public ?string $currentFile = null;
     
     public function run()
     {
@@ -49,12 +50,32 @@ class FileNavigator extends Widget
             }
         }
         foreach ($subdirs as $subdir) {
-            $result .= "<details><summary>$subdir</summary>";
+            if (isset($this->currentFile)) {
+                $d = $relDir . DIRECTORY_SEPARATOR . $subdir;
+                $l = strlen($d);
+                $e = substr($this->currentFile, 0, $l);
+                if ($d === $e) {
+                    $result .= '<details open="open">';
+                } else {
+                    $result .= '<details>';
+                }
+            
+            } else {
+                $result .= '<details>';
+            }
+            $result .= "<summary>$subdir</summary>";
             $result .= self::dirToHtml($dir . DIRECTORY_SEPARATOR . $subdir);
             $result .= "</details>";
         }
+        if ($subdirs != [] && $files != []) $result .= '<hr>';
         foreach ($files as $file) {
-            $result .= '<p><a href="' . Url::getEditorUrl($this->moduleId, $relDir . DIRECTORY_SEPARATOR . $file) . '">' . $file  . '</a></p>';
+            // @todo: mark current file
+            $f = $relDir . DIRECTORY_SEPARATOR . $file;
+            if ($f == $this->currentFile) {
+                $result .= '<p class="current">' . $file . '</p>';
+            } else {
+                $result .= '<p><a href="' . Url::getEditorUrl($this->moduleId, $f) . '">' . $file  . '</a></p>';
+            }
         }
         $result .= "</div>";
         
