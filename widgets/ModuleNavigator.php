@@ -24,7 +24,11 @@ class ModuleNavigator extends Widget
         ksort($modules);
         
         foreach ($modules as $id => $module) {
-            $result .= '<p><a href="' . Url::getEditorUrl($id)  . '">' . $id . '</a> - ' . $module->getName() . '</p>';
+            if ( $module->id === $this->moduleId) {
+                $result .= '<p class="current">' . $id . ' - ' . $module->getName() . '</p>';
+            } else {
+                $result .= '<p><a href="' . Url::getEditorUrl($id)  . '">' . $id . ' - <i>' . $module->getName() . '</i></a></p>';
+            }
         }
         $result .= '</div></details>';
         

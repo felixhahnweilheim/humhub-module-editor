@@ -16,15 +16,12 @@ NavigatorAssets::register($this);
 ?>
 <div class="module-editor-nav-container">
     <?= ModuleNavigator::widget(['moduleId' => $model->moduleId]); ?>
-    <?= FileNavigator::widget(['moduleId' => $model->moduleId]) ?>
+    <?= FileNavigator::widget(['moduleId' => $model->moduleId, 'currentFile' => $model->file]) ?>
 </div>
 <?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
-    <h2 style="margin-top:0">
-        <?= $model->oldFile ? Yii::t('ModuleEditorModule.admin', 'Edit File') : Yii::t('ModuleEditorModule.admin', 'New File')?>
-    </h2>
-    <?= $form->field($model, 'file'); ?>
-    <div class="form-group required"><label><?= Yii::t('ModuleEditorModule.admin', 'Content') ?></label>
-        <div style="position:relative;width:100%;height:500px;">
+    <?= $form->field($model, 'file')->label(false); ?>
+    <div class="form-group required">
+        <div style="position:relative;width:100%;height:57vh;min-height:300px">
             <?= $form->field($model, 'content')->textarea(); ?>
             <div id="editor"><?= htmlspecialchars($model->content) ?></div>
         </div>
@@ -32,6 +29,6 @@ NavigatorAssets::register($this);
     <div class="form-group">
         <?= DeleteButton::widget(['model' => $model]) ?>
         <?= Html::saveButton(Icon::get('floppy-o') . Yii::t('base', 'Save')) ?>
-        <small>&nbsp;Ctrl + S</small>
+        <div class="button-help-text"><small>&nbsp;Ctrl + S</small></div>
     </div>
-<?php ActiveForm::end(); ?>
+<?php ActiveForm::end() ?>
