@@ -15,6 +15,11 @@ humhub.module("module_editor", function(module, require, $)
     var buttonHelpTextContent = buttonHelpText.html();
 
     var init = function(isPjax) {
+
+        var viewState = humhub.modules.ui.view.getState();
+        if (viewState.moduleId !== 'module-editor' || viewState.controllerId !== 'editor') {
+            return;
+        }
         
         mode = module.config.mode;
         userConfirmed = false;
@@ -115,7 +120,15 @@ humhub.module("module_editor", function(module, require, $)
         }
     };
     
+    var unload = function($pjax) {
+        // Remove event handlers
+        $(document).off("pjax:beforeSend", "**");
+        window.removeEventListener("beforeunload", unloadListener);
+        window.onbeforeunload = null;
+    }
+    
     module.export({
-        init: init
+        init: init,
+        unload: unload
     });
 });
