@@ -26,22 +26,3 @@ Extract module messages for a module
 
 ## Download Module Files
 Simply download the files of a module as ZIP archive.
-
-## CSP Configuration for ACE Editor
-The annotations of the ACE Editor (syntax errors and warnings) currently only work after adding the following CSP configuration to `protected/config/web.php`:
-```
-return [
-    'modules' => [
-        'web' => [
-            'security' =>  [
-                "csp" => [
-                    "worker-src" => [
-                        "self" => true,
-                        "blob" => true
-                    ]
-                ]
-            ]
-        ]
-    ]
-];
-```

@@ -15,9 +15,6 @@ humhub.module("module_editor", function(module, require, $)
     var buttonHelpTextContent = buttonHelpText.html();
 
     var init = function(isPjax) {
-        window.onerror = function(msg, url, linenumber) {
-            return true;
-        }
         
         mode = module.config.mode;
         userConfirmed = false;
@@ -61,7 +58,7 @@ humhub.module("module_editor", function(module, require, $)
         
         var buildDom = require("ace/lib/dom").buildDom;
         var refs = {};
-        var updateToolbar =function() {
+        var updateToolbar = function() {
             refs.undoButton.disabled = !editor.session.getUndoManager().hasUndo();
             refs.redoButton.disabled = !editor.session.getUndoManager().hasRedo();
         
