@@ -3,6 +3,7 @@
 namespace humhub\modules\moduleEditor\models;
 
 use humhub\modules\moduleEditor\helpers\Url;
+use humhub\modules\moduleEditor\helpers\Memory;
 use Yii;
 use yii\helpers\FileHelper;
 
@@ -28,9 +29,19 @@ class FileEditor extends \yii\base\Model
     public $content;
     public $extension;
 
-    public function __construct(string $moduleId, ?string $file)
+    public function __construct(string $moduleId = null, ?string $file)
     {
-        $this->moduleId = $moduleId;
+        parent::__construct();
+        if (isset($moduleId)) {
+            $this->moduleId = $moduleId;
+        } else {
+            $this->moduleId = Memory::getLastModule();
+        }
+        if ($this->moduleId === null) {
+            $this->moduleId = 'module-editor';
+        }
+        Memory::saveLastModule($this->moduleId);
+        
         $this->extension = pathinfo($file, PATHINFO_EXTENSION);
         $this->file = $file;
         $this->oldFile = $this->file;

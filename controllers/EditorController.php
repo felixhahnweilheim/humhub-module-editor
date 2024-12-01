@@ -18,7 +18,7 @@ class EditorController extends \humhub\modules\admin\components\Controller
         $this->appendPageTitle(Yii::t('ModuleEditorModule.admin', 'File Editor'));
     }
     
-    public function actionIndex(string $moduleId = 'module-editor', string $file = null)
+    public function actionIndex(string $moduleId = null, string $file = null)
     {
         $form = new FileEditor($moduleId, $file);
         
