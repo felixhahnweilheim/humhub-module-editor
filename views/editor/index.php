@@ -15,7 +15,6 @@ AceAssets::addAssetsFor($this, $model->extension);
 NavigatorAssets::register($this);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
-<?= //$form->field($model, 'moduleId')->dropdownList($model->getModules()) ?>
 <div class="module-editor-nav-container">
     <?= ModuleNavigator::widget(['moduleId' => $model->moduleId]); ?>
     <?= FileNavigator::widget(['moduleId' => $model->moduleId, 'currentFile' => $model->file]) ?>
