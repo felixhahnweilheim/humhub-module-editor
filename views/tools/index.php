@@ -32,7 +32,7 @@ ToolsAssets::register($this);
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="exclude-input"><?= Yii::t("ModuleEditorModule.admin", "Exclude paths") ?></label>
+    <label class="control-label" for="exclude-input"><?= Yii::t("ModuleEditorModule.admin", "Exclude paths") ?> (regex)</label>
     <div>
         <div id="default-exclude-button" class="btn btn-sm btn-default"><?= Yii::t('ModuleEditorModule.admin', 'Set to default') ?></div> 
         <div id="remove-button" class="btn btn-sm btn-default"><?= Yii::t('ModuleEditorModule.admin', 'Remove') ?></div>

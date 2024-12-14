@@ -104,7 +104,7 @@ class FileEditor extends \yii\base\Model
         
         // Create directory if it does not exist yet
         if (!is_dir(dirname($this->getFullPath()))) {
-            mkdir(dirname($this->getFullPath()));
+            mkdir(dirname($this->getFullPath()), 0755, true);
         }
         
         // Write contents / Create file
@@ -127,5 +127,15 @@ class FileEditor extends \yii\base\Model
     private function getFullPathOld(): string
     {
         return Yii::getAlias('@' . $this->moduleId . $this->oldFile);
+    }
+	
+    public function getModules(): array
+    {
+        $result = [];
+        $modules = Yii::$app->moduleManager->getModules();
+        foreach ($modules as $id => $module) {
+            $result[$id] = $module->getName() . ' (' . $id . ')';
+        }
+        return ksort($result);
     }
 }

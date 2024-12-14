@@ -14,11 +14,12 @@ use yii\web\View;
 AceAssets::addAssetsFor($this, $model->extension);
 NavigatorAssets::register($this);
 ?>
+<?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
+<?= //$form->field($model, 'moduleId')->dropdownList($model->getModules()); ?>
 <div class="module-editor-nav-container">
     <?= ModuleNavigator::widget(['moduleId' => $model->moduleId]); ?>
     <?= FileNavigator::widget(['moduleId' => $model->moduleId, 'currentFile' => $model->file]) ?>
 </div>
-<?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
     <?= $form->field($model, 'file')->label(false); ?>
     <div class="form-group required">
         <div style="position:relative;width:100%;height:57vh;min-height:300px">

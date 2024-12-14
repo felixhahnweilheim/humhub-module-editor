@@ -32,5 +32,7 @@ return [
     'unknown module path' => 'unbekannter Modul-Pfad',
     'Exclude paths' => '',
     'File name & path relative to the module directory' => '',
+    'Remove' => '',
+    'Set to default' => '',
     'Solve syntax errors before saving the file!' => '',
 ];

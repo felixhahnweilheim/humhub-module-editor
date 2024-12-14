@@ -22,6 +22,7 @@ class CreateController extends \humhub\modules\admin\components\Controller
 
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
             $this->view->saved();
+            $this->redirect(['/module-editor', 'moduleId' => $form->moduleId, 'file' => '/Module.php']);
         }
 
         return $this->render('index', ['model' => $form]);

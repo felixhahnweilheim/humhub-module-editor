@@ -80,6 +80,6 @@ class ModuleMessages extends \yii\base\Model
         foreach ($modules as $id => $module) {
             $result[$id] = $module->getName() . ' (' . $id . ')';
         }
-        return $result;
+        return ksort($result);
     }
 }
