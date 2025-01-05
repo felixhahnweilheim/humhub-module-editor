@@ -18,41 +18,40 @@ class FileEditor extends \yii\base\Model
         'json' => 'json',
         'less' => 'less',
         'md' => 'markdown',
+        'txt' => 'text',
         'php' => 'php',
         'sh' => 'sh',
         'yaml' => 'yaml'
     ];
     
-    public $moduleId;
-    public $file;
-    public $oldFile;
-    public $content;
-    public $extension;
-
-    public function __construct(string $moduleId = null, ?string $file)
+    // ID of the edited module
+    public string $moduleId;
+    // file name including path relative to the modul's directory
+    public string $file;
+    // old file name (null if we create a new file, different to file when we rename the file)
+    public ?string $oldFile = null;
+    // file extension
+    public ?string $extension;
+    // content of the file
+    public ?string $content;
+    
+    public function __construct(string $moduleId, ?string $file)
     {
         parent::__construct();
-        if (isset($moduleId)) {
-            $this->moduleId = $moduleId;
-        } else {
-            $this->moduleId = Memory::getLastModule();
-        }
-        if ($this->moduleId === null) {
-            $this->moduleId = 'module-editor';
-        }
-        Memory::saveLastModule($this->moduleId);
         
-        $this->extension = pathinfo($file, PATHINFO_EXTENSION);
+        $this->moduleId = $moduleId;
         $this->file = $file;
         $this->oldFile = $this->file;
+        
         if ($this->file !== null) {
-            $this->content = file_get_contents($this->getFullPath());
+            $this->extension = $this->getExtension();
             if (!$this->validate()) {
                 throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'This file type is not supported.'));
             }
+            $this->content = file_get_contents($this->getFullPath());
         }
     }
-
+    
     public function rules(): array
     {
         return [
@@ -62,24 +61,34 @@ class FileEditor extends \yii\base\Model
         ];
     }
     
-    public function checkFile(string $attribute, $params, $validator)
+    /**
+     * Create: Do not overwrite an existing file
+     * Accept all files without extension or with known extension
+     * Create and Rename: Do not accept unknown file type
+     * Edit: Allow other plain text files
+     */
+    public function checkFile(string $attribute, $params, $validator): void
     {
-        // Check mime type
-        if (!isset(self::ACE_MODES[$this->extension])) {
-            // Only allow known file types for creating
-            if ($this->oldFile === null) {
-                $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'This file type is not supported.'));
-                return;
-            }
-            // Allow other plain text files for editing
-            if (mime_content_type($this->getFullPath()) !== 'text/plain') {
-                $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'This file type is not supported.'));
-            }
-        }
-        
-        // File creating: Do not overwrite an existing file
+        // Create: Do not overwrite an existing file
         if ($this->oldFile === null && file_exists(self::getFullPath())) {
             $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'The file already exists.'));
+            return;
+        }
+        
+        // Accept all files without extension or with known extension
+        if ($this->extension === null || isset(self::ACE_MODES[$this->extension])) {
+            return;
+        }
+        
+        // If we reach here the file extension is unknown
+        // Create and Rename: Do not accept unknown file type
+        if ($this->oldFile === null || $this->file !== $this->oldFile) {
+            $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'This file type can not be created.'));
+            return;
+        }
+        // Edit: Allow other plain text files
+        if (mime_content_type($this->getFullPath()) !== 'text/plain') {
+            $this->addError($attribute, Yii::t('ModuleEditorModule.admin', 'This file type can not be edited.'));
         }
     }
     
@@ -89,12 +98,19 @@ class FileEditor extends \yii\base\Model
             'file' => Yii::t('ModuleEditorModule.admin', 'File name & path relative to the module directory')
         ];
     }
-	
-	public function beforeValidate(): bool
-	{
-		$this->extension = pathinfo($this->file, PATHINFO_EXTENSION);
-		return true;
-	}
+    
+    /**
+     * Adds "/" at beginning of file name if needed
+     * Update extension
+     */
+    public function beforeValidate(): bool
+    {
+        if (substr($this->file,0,1) !== '/') {
+            $this->file = '/' . $this->file;
+        }
+        $this->extension = pathinfo($this->file, PATHINFO_EXTENSION);
+        return true;
+    }
 
     public function save(): bool
     {
@@ -128,15 +144,13 @@ class FileEditor extends \yii\base\Model
     {
         return Yii::getAlias('@' . $this->moduleId . $this->oldFile);
     }
-	
-    public function getModules(): array
+    
+    private function getExtension(): ?string
     {
-        $result = [];
-        $modules = Yii::$app->moduleManager->getModules();
-        foreach ($modules as $id => $module) {
-            $result[$id] = $module->getName() . ' (' . $id . ')';
-        }
-        ksort($result);
-        return $result;
+        // for files like "/.gitattributes" remove the dot
+        $fileWithoutDot = (substr($this->file,0,2) === '/.') ? '/' . substr($this->file,2) : $this->file;
+        $pathInfo = pathinfo($fileWithoutDot);
+        
+        return isset($pathInfo['extension']) ? $pathInfo['extension'] : null;
     }
 }

@@ -17,9 +17,9 @@ class Url extends BaseUrl
         return static::getEditorUrl();
     }
 	
-    public static function getEditorUrl(string $moduleId = null, ?string $file = "/Module.php")
+    public static function getEditorUrl(string $moduleId = null, ?string $file = null, string $action = 'edit')
     {
-        return static::to([static::ROUTE_EDITOR, 'moduleId' => $moduleId, 'file' => $file]);
+        return static::to([static::ROUTE_EDITOR, 'moduleId' => $moduleId, 'file' => $file, 'action' => $action]);
     }
     
     public static function getCreateUrl()

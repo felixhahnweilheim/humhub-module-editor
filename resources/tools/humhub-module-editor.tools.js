@@ -6,8 +6,6 @@ humhub.module("module_editor.tools", function(module, require, $)
         
         const defaultEx =
 "^/\\\.\n^/tests\n^\\\.github\n^/build.*\\\.sh";
-    
-        var moduleSelect = $('#modulemessages-moduleid');
         var zipBtn = $('#download-zip-btn');
         var excludeInput = $('textarea[name="exclude-input"');
         var defExBtn = $('#default-exclude-button');
@@ -15,7 +13,7 @@ humhub.module("module_editor.tools", function(module, require, $)
         
         zipBtn.on("click", function() {
             try {
-            var moduleId = moduleSelect.val();
+            var moduleId = $('#module-editor-topbar #module-editor-module-dropdown select').select2('data')[0].id;
             var exclude = excludeInput.val();
             exclude = exclude.replace(/^(?=\n)$|^\s*|\s*$|\n\n+/gm, "");//remove blank lines
             if (exclude !== '') {

@@ -1,0 +1,84 @@
+#editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+
+#module-editor-topbar #module-editor-module-dropdown {
+    width: 280px;
+    margin: 0 5px;
+    padding-top: 5px;
+}
+#module-editor-topbar .select2-container--humhub .select2-results > .select2-results__options {
+    max-height: calc(100vh - 250px);
+}
+#module-editor-topbar .tab-menu {
+    padding-top: 5px;
+}
+@media (max-width: 768px) {
+    #module-editor-topbar .tab-menu {
+        padding-top:3em;
+    }
+}
+#module-editor-topbar .tab-menu .nav-tabs {
+    padding-left: 0;
+}
+#module-editor-topbar .nav-tabs > .active:first-child > a {
+    border-left-color: transparent;
+}
+
+
+@media (max-width: 768px) {
+    .module-editor-nav {
+        margin-bottom: 20px;
+    }
+}
+.module-editor-nav-heading {
+    cursor: pointer;
+    line-height: 2;
+    padding: 10px 20px;
+    background-color: var(--background-color-page);
+}
+.module-editor-nav summary {
+    cursor: pointer;
+    padding-left: 10px;
+    margin: 10px 0;
+    display: list-item;
+    line-height: 2;
+}
+.module-editor-nav summary:hover, .module-editor-nav p:hover {
+    background-color: var(--background-color-highlight);
+}
+.module-editor-nav details {
+    padding: 0 0 0 5px;
+    margin: 0px 0px 5px;
+}
+#file-nav-content-main {
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+}
+.module-editor-nav-content {
+    overflow-y: auto;
+    box-shadow: inset 5px 5px 20px var(--default);
+    padding: 0 0 0 10px;
+}
+.module-editor-nav-content p {
+    padding: 5px 0 5px 10px;
+    margin: 5px 0;
+}
+details.module-editor-nav {
+    padding: 0;
+}
+
+.panel .panel-body p.current {
+    background: var(--background-color-highlight);
+    color: var(--text-color-secondary);
+    margin-bottom: 0;
+}
+
+.field-fileeditor-file {
+    margin-bottom: 0;
+}

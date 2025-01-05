@@ -20,4 +20,18 @@ class Memory
         $settings = Yii::$app->getModule('module-editor')->settings->user();
         return $settings->get('lastModule');
     }
+    
+    static function saveLastEditedFile(string $moduleId, string $file): bool
+    {
+        $settings = Yii::$app->getModule('module-editor')->settings->user();
+        $settings->set('lastFile', $moduleId . ',' . $file);
+        
+        return true;
+    }
+    
+    static function getLastFile(): ?array
+    {
+        $settings = Yii::$app->getModule('module-editor')->settings->user();
+        return explode(',', $settings->get('lastFile'));
+    }
 }

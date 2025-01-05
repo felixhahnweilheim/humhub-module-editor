@@ -27,10 +27,7 @@ class FileDelete extends \yii\base\Model
         if (!$this->validate()) {
             return false;
         }
-        if (unlink($this->getFullPath()) === false) {
-            return false;
-        }
-        return true;
+        return unlink($this->getFullPath());
     }
     
     private function getFullPath(): string

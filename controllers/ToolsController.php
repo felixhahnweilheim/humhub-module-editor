@@ -3,6 +3,7 @@
 namespace humhub\modules\moduleEditor\controllers;
 
 use humhub\modules\moduleEditor\models\ModuleMessages;
+use humhub\modules\moduleEditor\helpers\Memory;
 use Yii;
 use yii\helpers\FileHelper;
 
@@ -12,6 +13,7 @@ class ToolsController extends \humhub\modules\admin\components\Controller
     private const EXCLUDE_DEFAULT = ['*/.*'];
     
     public $subLayout = '@module-editor/views/layouts/admin';
+    public $editorModuleId;
     
     public function init()
     {
@@ -22,7 +24,17 @@ class ToolsController extends \humhub\modules\admin\components\Controller
     
     public function actionIndex($moduleId = null): string
     {
-        $form = new ModuleMessages($moduleId);
+        if (isset($moduleId)) {
+            $this->editorModuleId = $moduleId;
+        } else {
+            $this->editorModuleId = Memory::getLastModule();
+        }
+        if ($this->editorModuleId === null) {
+            $this->editorModuleId = 'module-editor';
+        }
+        Memory::saveLastModule($this->editorModuleId);
+		
+        $form = new ModuleMessages($this->editorModuleId);
 
         if ($form->load(Yii::$app->request->post())) {
             $form->save();

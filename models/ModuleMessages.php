@@ -11,6 +11,12 @@ class ModuleMessages extends \yii\base\Model
     public ?string $moduleId;
     public ?string $response = null;
     
+    public function __construct(string $moduleId)
+    {
+        parent::__construct();
+        $this->moduleId = $moduleId;
+    }
+    
     public function init()
     {
         parent::init();
@@ -71,16 +77,5 @@ class ModuleMessages extends \yii\base\Model
             return true;
         }
         return false;
-    }
-    
-    public function getModules(): array
-    {
-        $result =[];
-        $modules = Yii::$app->moduleManager->getModules();
-        foreach ($modules as $id => $module) {
-            $result[$id] = $module->getName() . ' (' . $id . ')';
-        }
-        ksort($result);
-        return $result;;
     }
 }

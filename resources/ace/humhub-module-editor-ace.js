@@ -1,4 +1,4 @@
-humhub.module("module_editor", function(module, require, $)
+humhub.module("module_editor.ace", function(module, require, $)
 {
     module.initOnPjaxLoad = true;
     
