@@ -9,12 +9,6 @@ class Module extends \humhub\components\Module
 {
     public $resourcesPath = 'resources';
     public $defaultRoute = 'editor';
-    
-    // Translatable Module Title
-    public function getName(): string
-    {
-        return Yii::t('ModuleEditorModule.admin', 'Module Editor');
-    }
 
     // Translatable Module Description
     public function getDescription(): string

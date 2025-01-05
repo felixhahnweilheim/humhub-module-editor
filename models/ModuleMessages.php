@@ -2,18 +2,37 @@
 
 namespace humhub\modules\moduleEditor\models;
 
+use humhub\modules\moduleEditor\helpers\Memory;
 use humhub\components\Module;
 use Yii;
 
 class ModuleMessages extends \yii\base\Model
 {
-    public $moduleId;
+    public ?string $moduleId;
     public ?string $response = null;
+    
+    public function __construct(string $moduleId)
+    {
+        parent::__construct();
+        $this->moduleId = $moduleId;
+    }
+    
+    public function init()
+    {
+        parent::init();
+        if (isset($moduleId)) {
+            $this->moduleId = $moduleId;
+        }
+        if (!isset($this->moduleId)) {
+            $this->moduleId = Memory::getLastModule();
+        }
+        Memory::saveLastModule($this->moduleId);
+    }
     
     public function rules(): array
     {
         return [
-            [['moduleId'], 'moduleExists'],
+            [['moduleId'], 'moduleExists']
         ];
     }
     
@@ -28,7 +47,7 @@ class ModuleMessages extends \yii\base\Model
     public function attributeLabels(): array
     {
         return [
-            'moduleId' => Yii::t('ModuleEditorModule.admin', 'Module'),
+            'moduleId' => Yii::t('ModuleEditorModule.admin', 'Module')
         ];
     }
 
@@ -44,6 +63,8 @@ class ModuleMessages extends \yii\base\Model
             return false;
         }
         
+        Memory::saveLastModule($this->moduleId);
+        
         $path = Yii::getAlias('@app');
         $output = null;
         $return_val = null;
@@ -56,15 +77,5 @@ class ModuleMessages extends \yii\base\Model
             return true;
         }
         return false;
-    }
-    
-    public function getModules(): array
-    {
-        $result =[];
-        $modules = Yii::$app->moduleManager->getModules();
-        foreach ($modules as $id => $module) {
-            $result[$id] = $module->getName() . ' (' . $id . ')';
-        }
-        return $result;
     }
 }

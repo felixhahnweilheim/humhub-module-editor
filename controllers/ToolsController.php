@@ -3,14 +3,17 @@
 namespace humhub\modules\moduleEditor\controllers;
 
 use humhub\modules\moduleEditor\models\ModuleMessages;
+use humhub\modules\moduleEditor\helpers\Memory;
 use Yii;
 use yii\helpers\FileHelper;
 
 class ToolsController extends \humhub\modules\admin\components\Controller
 {
     private const ZIP_DIR = '@runtime/module-editor';
+    private const EXCLUDE_DEFAULT = ['*/.*'];
     
     public $subLayout = '@module-editor/views/layouts/admin';
+    public $editorModuleId;
     
     public function init()
     {
@@ -19,9 +22,19 @@ class ToolsController extends \humhub\modules\admin\components\Controller
         $this->appendPageTitle(Yii::t('ModuleEditorModule.admin', 'Module Editor'));
     }
     
-    public function actionIndex(): string
+    public function actionIndex($moduleId = null): string
     {
-        $form = new ModuleMessages();
+        if (isset($moduleId)) {
+            $this->editorModuleId = $moduleId;
+        } else {
+            $this->editorModuleId = Memory::getLastModule();
+        }
+        if ($this->editorModuleId === null) {
+            $this->editorModuleId = 'module-editor';
+        }
+        Memory::saveLastModule($this->editorModuleId);
+		
+        $form = new ModuleMessages($this->editorModuleId);
 
         if ($form->load(Yii::$app->request->post())) {
             $form->save();
@@ -30,7 +43,7 @@ class ToolsController extends \humhub\modules\admin\components\Controller
         return $this->render('index', ['model' => $form]);
     }
     
-    public function actionDownloadZip($moduleId)
+    public function actionDownloadZip(string $moduleId, string $exclude = null)
     {
         $modulePath =  Yii::getAlias('@' . $moduleId);
         $pathLength = strlen($modulePath);
@@ -49,11 +62,16 @@ class ToolsController extends \humhub\modules\admin\components\Controller
         $files = FileHelper::findFiles($modulePath);
         
         foreach ($files as $file) {
-            $zip->addFile($file, $moduleId . substr($file, $pathLength));
+            $relPath = substr($file, $pathLength);
+            if (!empty($exclude) && preg_match('#' . $exclude . '#', $relPath)) {
+                continue;
+            }
+            
+            $zip->addFile($file, $moduleId . $relPath);
         }
 
         $zip->close();
-    
+        
         return Yii::$app->response->sendFile($tempFile);
     }
 }

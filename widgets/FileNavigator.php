@@ -2,6 +2,7 @@
 
 namespace humhub\modules\moduleEditor\widgets;
 
+use humhub\modules\ui\icon\widgets\Icon;
 use humhub\modules\moduleEditor\helpers\Url;
 use humhub\components\Widget;
 use Yii;
@@ -16,13 +17,10 @@ class FileNavigator extends Widget
     
     public function run()
     {
-        $result = '<details class="module-editor-nav"><summary><b>' . Yii::t('ModuleEditorModule.admin', 'File Navigator') . '</b>
-<a class="btn btn-primary btn-sm pull-right" href="' . Url::getEditorUrl($this->moduleId, null) . '">+</a>
-</summary>';
+        $result = '<div class="module-editor-nav"><div class="module-editor-nav-heading">' . Icon::get('folder') . ' <b>' . Yii::t('ModuleEditorModule.admin', 'File Navigator') . '</b>
+<a class="btn btn-primary btn-sm pull-right" href="' . Url::getEditorUrl($this->moduleId, null, 'create') . '">+</a></div>';
         
-        $result .= self::dirToHtml($this->getBasePath());
-        
-        $result .= '</details>';
+        $result .= '<div id="file-nav-content-main" style="display:none">' . self::dirToHtml($this->getBasePath()) . '</div></div>';
         
         return $result;
     }
@@ -67,7 +65,6 @@ class FileNavigator extends Widget
             $result .= self::dirToHtml($dir . DIRECTORY_SEPARATOR . $subdir);
             $result .= "</details>";
         }
-        if ($subdirs != [] && $files != []) $result .= '<hr>';
         foreach ($files as $file) {
             // @todo: mark current file
             $f = $relDir . DIRECTORY_SEPARATOR . $file;

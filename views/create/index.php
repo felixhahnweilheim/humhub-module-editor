@@ -6,9 +6,7 @@ use humhub\libs\Html;
 ?>
 
 <?php $form = ActiveForm::begin(['id' => 'admin-index-form']); ?>
-    <div class="form-group">
-        <h3 style="margin-top:0"><?= Yii::t('ModuleEditorModule.admin', 'New Module') ?></h3>
-    </div>
+<div style="max-width:600px;margin:0 auto">
     <div class="form-group">
         <?= $form->field($model, 'modulePath')->dropDownList($model->getModulePaths()); ?>
         <?= $form->field($model, 'moduleId'); ?>
@@ -20,4 +18,5 @@ use humhub\libs\Html;
     <div class="form-group">
         <?= Html::submitButton(Yii::t('ModuleEditorModule.admin', 'Create'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']); ?>
     </div>
+</div>
 <?php ActiveForm::end(); ?>
