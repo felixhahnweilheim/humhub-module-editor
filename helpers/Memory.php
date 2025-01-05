@@ -29,9 +29,9 @@ class Memory
         return true;
     }
     
-    static function getLastFile(): ?array
+    static function getLastFile(): array
     {
-        $settings = Yii::$app->getModule('module-editor')->settings->user();
-        return explode(',', $settings->get('lastFile'));
+        $setting = Yii::$app->getModule('module-editor')->settings->user()->get('lastFile');
+        return !empty($setting) ? explode(',', $setting) : [null, null];
     }
 }

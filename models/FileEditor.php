@@ -25,15 +25,15 @@ class FileEditor extends \yii\base\Model
     ];
     
     // ID of the edited module
-    public string $moduleId;
+    public $moduleId;
     // file name including path relative to the modul's directory
-    public string $file;
+    public $file;
     // old file name (null if we create a new file, different to file when we rename the file)
-    public ?string $oldFile = null;
+    public $oldFile = null;
     // file extension
-    public ?string $extension;
+    public $extension;
     // content of the file
-    public ?string $content;
+    public $content;
     
     public function __construct(string $moduleId, ?string $file)
     {

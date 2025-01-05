@@ -32,6 +32,8 @@ return [
     'Response' => '',
     'Solve syntax errors before saving the file!' => '',
     'The file already exists.' => '',
+    'This file type can not be created.' => '',
+    'This file type can not be edited.' => '',
     'This file type is not supported.' => '',
     'Title' => '',
     'Tools' => '',
