@@ -27,6 +27,7 @@ Most important keybord shortcuts:
 - Ctrl + Y: Redo
 - Ctrl + ,: Open settings menu
 - Ctrl + H: Search and Replace
+- Ctrl + Alt + H: Show available keyboard shorcuts
 
 ## Create a module sceleton
 Just a little time saver for the very beginning of a module.

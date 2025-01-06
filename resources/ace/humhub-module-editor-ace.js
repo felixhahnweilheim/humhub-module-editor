@@ -60,6 +60,18 @@ humhub.module("module_editor.ace", function(module, require, $)
                 e.preventDefault();
             }
         });
+        
+       // add command to lazy-load keybinding_menu extension
+        editor.commands.addCommand({
+            name: "showKeyboardShortcuts",
+            bindKey: {win: "Ctrl-Alt-h", mac: "Command-Alt-h"},
+            exec: function(editor) {
+                ace.config.loadModule("ace/ext/keybinding_menu", function(module) {
+                    module.init(editor);
+                    editor.showKeyboardShortcuts();
+                });
+            }
+        });
 
         if(isPjax) {
             // Remove event handlers
@@ -101,7 +113,7 @@ humhub.module("module_editor.ace", function(module, require, $)
         $(document).off("pjax:beforeSend", "**");
         window.removeEventListener("beforeunload", unloadListener);
         window.onbeforeunload = null;
-    }
+    };
     
     module.export({
         init: init,
