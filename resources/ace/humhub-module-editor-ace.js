@@ -60,30 +60,6 @@ humhub.module("module_editor.ace", function(module, require, $)
                 e.preventDefault();
             }
         });
-        
-        var buildDom = require("ace/lib/dom").buildDom;
-        var refs = {};
-        var updateToolbar = function() {
-            refs.undoButton.disabled = !editor.session.getUndoManager().hasUndo();
-            refs.redoButton.disabled = !editor.session.getUndoManager().hasRedo();
-        
-            buildDom(["div", { class: "toolbar" },
-              ["button", {
-                ref: "undoButton",
-                onclick: function() {
-                    editor.undo();
-                }
-              }, "undo"],
-              ["button", {  
-                ref: "redoButton",
-                onclick: function() {
-                    editor.redo();
-                }
-              }, "redo"],
-            ], document.body, refs);
-            document.body.appendChild(editor.container);
-        };
-        //editor.on("input", updateToolbar);
 
         if(isPjax) {
             // Remove event handlers
