@@ -67,6 +67,7 @@ class EditorController extends \humhub\modules\admin\components\Controller
         $form = new FileDelete($moduleId, $file);
         
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
+            Memory::saveLastEditedFile(null, null);
             $this->view->saved();
             return $this->redirect(Url::getEditorUrl($form->moduleId));
         }

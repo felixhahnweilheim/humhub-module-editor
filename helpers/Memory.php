@@ -21,11 +21,18 @@ class Memory
         return $settings->get('lastModule');
     }
     
-    static function saveLastEditedFile(string $moduleId, string $file): bool
+    /**
+     * saves last edited file with its module
+     * deletes the setting if file is null
+     */
+    static function saveLastEditedFile(?string $moduleId, ?string $file): bool
     {
         $settings = Yii::$app->getModule('module-editor')->settings->user();
-        $settings->set('lastFile', $moduleId . ',' . $file);
-        
+        if ($file === null) {
+            $settings->delete('lastFile');
+        } else {
+            $settings->set('lastFile', $moduleId . ',' . $file);
+        }
         return true;
     }
     
