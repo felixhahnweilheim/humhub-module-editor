@@ -32,6 +32,7 @@ return [
     'Response' => '',
     'Solve syntax errors before saving the file!' => '',
     'The file already exists.' => '',
+    'The requested module was not found!' => '',
     'This file type can not be created.' => '',
     'This file type can not be edited.' => '',
     'This file type is not supported.' => '',

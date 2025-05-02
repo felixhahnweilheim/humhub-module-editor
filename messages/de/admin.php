@@ -32,10 +32,11 @@ return [
     'Response' => 'Antwort',
     'Solve syntax errors before saving the file!' => 'Löse Syntax-Fehler vor dem Speichern der Datei!',
     'The file already exists.' => 'Die Datei existiert bereits.',
+    'This file type can not be created.' => 'Dieser Datei-Typ kann nicht erstellt werden.',
+    'This file type can not be edited.' => 'Dieser Datei-Typ kann nicht bearbeitet werden.',
     'This file type is not supported.' => 'Dieser Datei-Typ wird nicht unterstützt.',
     'Title' => 'Titel',
     'Tools' => 'Werkzeuge',
     'unknown module path' => 'unbekannter Modul-Pfad',
-    'This file type can not be created.' => 'Dieser Datei-Typ kann nicht erstellt werden.',
-    'This file type can not be edited.' => 'Dieser Datei-Typ kann nicht bearbeitet werden.',
+    'The requested module was not found!' => 'Das angefragte Modul wurde nicht gefunden!',
 ];

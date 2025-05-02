@@ -35,7 +35,7 @@ class FileEditor extends \yii\base\Model
     // content of the file
     public $content;
     
-    public function __construct(string $moduleId, ?string $file)
+    public function __construct(string $moduleId, ?string $file, ?string $action)
     {
         parent::__construct();
         
@@ -45,10 +45,16 @@ class FileEditor extends \yii\base\Model
         
         if ($this->file !== null) {
             $this->extension = $this->getExtension();
+            
+            if (file_exists($this->getFullPath())) {
+                $this->content = file_get_contents($this->getFullPath());
+            } elseif ($action == 'edit') {// the specified file does not exists, so we create a new one
+                Yii::$app->controller->redirect(Url::getEditorUrl($this->moduleId, $this->file, 'create'));
+            }
+            
             if (!$this->validate()) {
                 throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'This file type is not supported.'));
             }
-            $this->content = file_get_contents($this->getFullPath());
         }
     }
     

@@ -11,6 +11,11 @@ use yii\web\View;
 
 AceAssets::addAssetsFor($this, $model->extension);
 ?>
+
+<?php foreach ($errors as $error): ?>
+    <div class="alert alert-danger"><?= $error ?></div>
+<?php endforeach; ?>
+
 <?php $form = ActiveForm::begin(['id' => 'file-editor-form']); ?>
 <div class="row">
 <div class="col col-xl-2 col-md-3 col-sm-4 module-editor-nav-container">

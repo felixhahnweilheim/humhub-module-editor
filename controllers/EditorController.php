@@ -23,6 +23,7 @@ class EditorController extends \humhub\modules\admin\components\Controller
     
     public function actionIndex(string $moduleId = null, string $file = null, string $action = 'edit')
     {
+        $errors = [];
         if (isset($moduleId)) {
             $this->editorModuleId = $moduleId;
         } else {
@@ -41,14 +42,15 @@ class EditorController extends \humhub\modules\admin\components\Controller
         
         //check data
         if (!BaseHelper::isAllowedModule($this->editorModuleId)) {
-            throw new \yii\web\HttpException(422, Yii::t('ModuleEditorModule.admin', 'Module not found.'));
+            $errors[] = Yii::t('ModuleEditorModule.admin', 'The requested module was not found!');
+            $this->editorModuleId = 'module-editor';
         }
         Memory::saveLastModule($this->editorModuleId);
         if ($file) {
             Memory::saveLastEditedFile($this->editorModuleId, $file);
         }
         
-        $form = new FileEditor($this->editorModuleId, $file);
+        $form = new FileEditor($this->editorModuleId, $file, $action);
         
         if ($form->load(Yii::$app->request->post()) && $form->save()) {
             $this->view->saved();
@@ -59,7 +61,7 @@ class EditorController extends \humhub\modules\admin\components\Controller
             }
         }
         
-        return $this->render('index', ['model' => $form]);
+        return $this->render('index', ['model' => $form, 'errors' => $errors]);
     }
     
     public function actionDeleteModal(string $moduleId, string $file)

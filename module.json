@@ -1,6 +1,6 @@
 {
     "id": "module-editor",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "name": "Module Editor",
     "description": "Create and edit modules via UI",
     "humhub": {
