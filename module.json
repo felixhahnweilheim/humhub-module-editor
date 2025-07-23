@@ -4,7 +4,7 @@
     "name": "Module Editor",
     "description": "Create and edit modules via UI",
     "humhub": {
-        "minVersion": "1.16"
+        "minVersion": "1.18"
     },
     "homepage": "https://github.com/felixhahnweilheim/humhub-module-editor",
     "authors": [
