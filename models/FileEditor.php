@@ -11,6 +11,7 @@ class FileEditor extends \yii\base\Model
 {
     public const ACE_MODES = [
         'css' => 'css',
+        'scss' => 'scss',
         'gitignore' => 'gitignore',
         'html' => 'html',
         'htm' => 'html',
