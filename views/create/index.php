@@ -1,7 +1,7 @@
 <?php
 
-use humhub\modules\ui\form\widgets\ActiveForm;
-use humhub\libs\Html;
+use humhub\widgets\form\ActiveForm;
+use humhub\helpers\Html;
 
 ?>
 

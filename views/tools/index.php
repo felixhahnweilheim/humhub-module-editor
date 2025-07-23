@@ -1,10 +1,10 @@
 <?php
 
 use humhub\modules\moduleEditor\assets\ToolsAssets;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 use humhub\modules\ui\icon\widgets\Icon;
-use humhub\widgets\Button;
-use humhub\libs\Html;
+use humhub\widgets\bootstrap\Button;
+use humhub\helpers\Html;
 
 ToolsAssets::register($this);
 ?>
