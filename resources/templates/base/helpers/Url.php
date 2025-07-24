@@ -3,7 +3,6 @@
 namespace humhub\modules\{module_camelCase}\helpers;
 
 use yii\helpers\Url as BaseUrl;
-use yii\web\Controller;
 
 class Url extends BaseUrl
 {
