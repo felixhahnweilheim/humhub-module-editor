@@ -4,7 +4,7 @@ namespace humhub\modules\moduleEditor\assets;
 
 use humhub\modules\moduleEditor\models\FileEditor;
 use Yii;
-use yii\web\View;
+use humhub\components\View;
 
 class AceAssets extends \humhub\components\assets\AssetBundle
 {

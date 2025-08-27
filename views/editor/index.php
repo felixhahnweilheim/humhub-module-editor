@@ -4,10 +4,10 @@ use humhub\modules\moduleEditor\assets\AceAssets;
 use humhub\modules\moduleEditor\helpers\Url;
 use humhub\modules\moduleEditor\widgets\FileNavigator;
 use humhub\modules\moduleEditor\widgets\DeleteButton;
-use humhub\modules\ui\form\widgets\ActiveForm;
-use humhub\libs\Html;
+use humhub\widgets\form\ActiveForm;
+use humhub\helpers\Html;
 use humhub\modules\ui\icon\widgets\Icon;
-use yii\web\View;
+use humhub\components\View;
 
 AceAssets::addAssetsFor($this, $model->extension);
 ?>

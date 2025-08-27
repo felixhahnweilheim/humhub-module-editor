@@ -6,7 +6,7 @@ use humhub\modules\moduleEditor\helpers\Url;
 use humhub\modules\moduleEditor\models\FileEditor;
 use humhub\components\Widget;
 use humhub\modules\ui\icon\widgets\Icon;
-use humhub\libs\Html;
+use humhub\helpers\Html;
 
 /**
  * Delete Button for File Editor

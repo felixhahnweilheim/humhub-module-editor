@@ -4,7 +4,7 @@ namespace humhub\modules\moduleEditor\widgets;
 
 use humhub\modules\moduleEditor\helpers\BaseHelper;
 use humhub\modules\moduleEditor\helpers\Url;
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use Yii;
 use humhub\modules\ui\menu\MenuLink;
 use humhub\modules\ui\menu\widgets\TabMenu;
