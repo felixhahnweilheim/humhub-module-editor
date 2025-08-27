@@ -4,6 +4,8 @@ Create and edit HumHub modules via UI
 **Warning:** This module is meant for HumHub developers only. Editing module files can break your site.
 So be careful, have a backup at hand and another way to edit files in case something went wrong.
 
+Tested up to HumHub version 1.18.
+
 The whole module is optimized for the use on the phone.
 
 ## Editor
